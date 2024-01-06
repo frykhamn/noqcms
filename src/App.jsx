@@ -7,7 +7,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <Routes>
+    <Routes basename="/noqcms">
     <Route path="/" element={<LandingComponent />} />
     <Route path="/login-page" element={<LoginPageComponent />} />
     <Route path="/cms-page" element={<CmsComponent />} />
