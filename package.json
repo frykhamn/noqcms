@@ -16,7 +16,8 @@
     "firebase-ci": "firebase ci",
     "firebase-ci-deploy": "firebase ci deploy",
     "firebase-ci-preview": "firebase ci preview",
-    "init-emulators": "npx firebase init emulators"
+    "init-emulators": "npx firebase init emulators",
+    "start-emulators": "npx firebase emulators:start"
   },
   "dependencies": {
     "firebase": "^10.7.1",
