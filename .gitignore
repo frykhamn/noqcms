@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Exclude specific files
+github/*
+!github/settings.json
+!github/otherfile.txt
+
+# Allow workflows folder
+!workflows/
