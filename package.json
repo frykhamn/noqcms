@@ -16,6 +16,7 @@
     "firebase-init-hosting-": "firebase init hosting",
     "firebase-serve": "firebase serve",
     "firebase-deploy": "firebase deploy",
+    "firebase-deploy-hosting": "firebase deploy --only hosting",
     "firebase-ci": "firebase ci",
     "firebase-ci-deploy": "firebase ci deploy",
     "firebase-ci-preview": "firebase ci preview",

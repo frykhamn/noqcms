@@ -30,3 +30,7 @@ github/*
 
 # Allow workflows folder
 !workflows/
+
+#firebase
+.firebase
+.firebaserc
