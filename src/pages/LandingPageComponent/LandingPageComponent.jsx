@@ -1,5 +1,6 @@
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
+import InformationComponent from "./components/InformationComponent";
 import ProfileGallery from "./components/ProfileGallery";
 
 const LandingComponent = () => {
@@ -16,97 +17,7 @@ const Main = () => {
   return (
     <>
       <main>
-        <section className="py-12">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-12">
-              <h2 className="text-4xl text-gray-900 mb-4">
-                NoQ - en IT-lösning för att boka sovplats för de som inte har
-                boende
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold mb-2">Vision</h3>
-                  <p className="text-gray-600">
-                    Vi tror att en digital lösning för akut hemlösa, härbärgen
-                    och handläggare kommer att Erbjuda ett humant och enkelt
-                    sätt att hitta en säng för ikväll för brukarna, Skapa
-                    enkelhet i administrationen av denna idag manuella process,
-                    Öppna upp fler möjligheter att erbjuda sängar och andra
-                    tjänster för värdar.
-                  </p>
-                  <a
-                    href="#"
-                    className="text-blue-600 hover:text-blue-700 mt-4 inline-block"
-                  >
-                    Learn more
-                  </a>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">
-                    Utvecklingområden
-                  </h3>
-                  <p className="text-gray-600">
-                    Vi överväger att utveckla ett slags regelverk som gör att
-                    några procent av brukarna kan godkännas direkt med
-                    automatik. Tanken är att förenkla för härbärgen. Kan vi
-                    förenkla för handläggare på härbärgen och administratörer i
-                    arbetet med fakturor och betalningar? Vi ska förstås följa
-                    lagar och regelverk kring hantering av personuppgifter.
-                  </p>
-                  <a
-                    href="#"
-                    className="text-blue-600 hover:text-blue-700 mt-4 inline-block"
-                  >
-                    Learn more
-                  </a>
-                </div>
-              </div>
-
-              <div>
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold mb-2">
-                    Jobbar du med bostadslösa idag?
-                  </h3>
-                  <p className="text-gray-600">
-                    Vi söker kontakt med er som på nått sätt idag har kontakt
-                    med hemlösa. För att kunna skapa en produkt osm går att
-                    använta av samtliga led, behöver vi er hjälp med att förstå
-                    de som skulle kunna använda den. För att nå målet behöver
-                    vi: Utveckla vårt nätverk av brukare och handläggare. Hitta
-                    intervjupersoner Kan du bidra med förslag?
-                  </p>
-                  <a
-                    href="#"
-                    className="text-blue-600 hover:text-blue-700 mt-4 inline-block"
-                  >
-                    Learn more
-                  </a>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">
-                    Jobbar du innom IT?
-                  </h3>
-                  <p className="text-gray-600">
-                    Som både ett probono och startup bolag behöver vi all
-                    kompetence inom ett IT-projekt. Scrum master, Projektledare,
-                    UX-designer, backend- fontend- fullsatck utvecklare? Hör av
-                    dig och hör hur du kan bidra. Allt är open source och de
-                    flesta kan alltid göra nått.
-                  </p>
-                  <a
-                    href="#"
-                    className="text-blue-600 hover:text-blue-700 mt-4 inline-block"
-                  >
-                    Learn more
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+     <InformationComponent></InformationComponent>
 
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
