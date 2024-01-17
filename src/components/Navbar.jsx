@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigator = useNavigate();
 
   function loginpageHandler() {
-    navigator("/login-page");
+    navigator("/loginCms");
   }
 
   return (

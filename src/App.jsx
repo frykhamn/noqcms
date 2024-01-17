@@ -1,5 +1,5 @@
-import CmsComponent from './pages/ContentComponent/CmsComponent';
-import LoginPageComponent from './pages/ContentComponent/LoginPageComponent';
+import CmsDashboard from './pages/ContentComponent/CmsDashboard';
+import LoginGoogle from "./authentication/LoginGoogle"
 import LandingComponent from './pages/LandingPageComponent/LandingPageComponent';
 import Navbar from './components/Navbar';
 import ErrorPage from './pages/ErrorPages/ErrorPage';
@@ -11,8 +11,8 @@ function App() {
         <Navbar></Navbar>
         <Routes basename="/noqcms">
           <Route path="/" element={<LandingComponent />} />
-          <Route path="/login-page" element={<LoginPageComponent />} />
-          <Route path="/cms-page" element={<CmsComponent />} />
+          <Route path="/loginCms" element={<LoginGoogle />} />
+          <Route path="/cmsDashboard" element={<CmsDashboard />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
