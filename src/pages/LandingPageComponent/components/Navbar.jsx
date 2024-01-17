@@ -1,4 +1,4 @@
-import logo from "../assets/images/logo.png";
+import logo from "../../../assets/images/logo.png";
 import SmallButtonComponent from "./SmallButtonComponent";
 
 import { useNavigate } from "react-router-dom";

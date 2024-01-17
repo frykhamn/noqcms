@@ -1,5 +1,5 @@
 import React from "react";
-import SmallButtonComponent from "../../../components/SmallButtonComponent";
+import SmallButtonComponent from "./SmallButtonComponent";
 
 const dummyData = [
   {
