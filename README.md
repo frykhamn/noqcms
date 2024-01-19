@@ -1,6 +1,10 @@
 # NoQ CMS
 
 ## Setting up the Project
+### Clone the Repository:
+- Download the repository to your local machine.
+    git clone https://github.com/your-username/your-repo.git
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
