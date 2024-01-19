@@ -1,14 +1,62 @@
+Certainly! Below is a sample README file for your project:
+
+---
+
 # NoQ CMS
 
 ## Setting up the Project
-### Clone the Repository:
-- Download the repository to your local machine.
-    git clone https://github.com/your-username/your-repo.git
 
+1. **Clone the Repository:**
+   - Download the repository to your local machine.
+     ```bash
+     git clone https://github.com/frykhamn/noqcms
+     ```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. **API Key Configuration:**
+   - Obtain the API key with Firebase configurations from a co-worker.
+   - For security reasons, store the API key in a file named `.env.local` in the project folder (outside of the `src` folder).
+   - Copy and paste the API key information into the `.env.local` file.
 
-Currently, two official plugins are available:
+     **Example `.env.local` file:**
+     ```env
+     REACT_APP_FIREBASE_API_KEY=your-api-key
+     REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+     REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+     REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+     REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+     REACT_APP_FIREBASE_APP_ID=your-app-id
+     ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. **Install Dependencies:**
+   - Run the following command to install project dependencies.
+     ```bash
+     npm install
+     ```
+
+4. **Start the Project Locally:**
+   - Run the following command to start the project locally.
+     ```bash
+     npm run dev
+     ```
+
+## Deploying with Firebase Hosting
+
+**Note:** Due to deployment issues, the current procedure is to build the project before deploying.
+
+1. **Build the Project:**
+   - Run the following command to build the project.
+     ```bash
+     npm run build
+     ```
+
+2. **Deploy with Firebase:**
+   - Run the following command to deploy the project to Firebase hosting.
+     ```bash
+     npm run firebase-deploy
+     ```
+
+## Additional Commands
+
+For other commands, refer to the `package.json` file and look under the `scripts` section.
+
+---
