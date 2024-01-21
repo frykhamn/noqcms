@@ -2,6 +2,7 @@ import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import InformationComponent from "./components/InformationComponent";
 import ProfileGallery from "./components/ProfileGallery";
+import Video from "./components/Video";
 
 const LandingComponent = () => {
   return (
@@ -13,32 +14,35 @@ const LandingComponent = () => {
   );
 };
 
+const demoData =
+{
+  title: "Demo inspelning 15/12 - 2023",
+  text: "Vi presenterar NoQ-gänget och går igenom varför vi gör det här samt vad våra förhoppningar är. Disskutioner om värdefull och nödvändig feedback kring produkten, dess syfte, användningsområde samt vilka problem den kan lösa.",
+  videoSrc: "https://drive.google.com/file/d/1DcezvhiJ3QRuydUTvxG8zZlm9EsrS-Zk/preview"
+};
+
+const aboutData =
+{
+  title: "Om oss video presentation",
+  text: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
+  videoSrc: "https://drive.google.com/drive/folders/1gZ6UhHIupRqUHRD8EJtou6u0V6x60wV2/preview"
+};
+
 const Main = () => {
   return (
     <>
       <main>
-     <InformationComponent></InformationComponent>
-
-        <section className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        
-
-            <div className="md:ml-12">
-              <h3 className="text-2xl font-semibold mb-3">
-                Demo inspelning 15/12 - 2023
-              </h3>
-              <p className="text-gray-600">
-                Häng med på vår första demo från den 15e december. Vi
-                presenterar NoQ-gänget och går igenom varför vi gör det här samt
-                vad våra förhoppningar är. Vi söker flera som jobbar med denna
-                målgrupp att vara med i framtiden. Så att vi kan fånga upp
-                värdefull och nödvändig feedback kring produkten, dess syfte,
-                användningsområde samt vilka problem den kan lösa.
-              </p>
-            </div>
-          </div>
-        </section>
+        <InformationComponent></InformationComponent>
+        <Video content={aboutData.text} 
+        title={aboutData.title} 
+        videoSrc={aboutData.videoSrc} 
+        left={true}></Video>
+        <Video
+          content={demoData.text}
+          title={demoData.title}
+          videoSrc={demoData.videoSrc}
+          left={false}
+        ></Video>
 
         <section className="py-20" style={{ backgroundColor: "#889892" }}>
           <div className="grid grid-cols-2 mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,13 +84,12 @@ const Main = () => {
 
             <div className="flex flex-wrap justify-center gap-8 mb-10">
               <div className="flex items-center justify-center gap-4 flex-wrap">
-             <ProfileGallery></ProfileGallery>
+                <ProfileGallery></ProfileGallery>
               </div>
             </div>
           </div>
         </section>
       </main>
-
     </>
   );
 };
