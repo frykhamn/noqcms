@@ -22,12 +22,7 @@ const Main = () => {
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <iframe
-              src="https://drive.google.com/file/d/1DcezvhiJ3QRuydUTvxG8zZlm9EsrS-Zk/preview"
-              width="640"
-              height="480"
-              allow="autoplay"
-            ></iframe>
+        
 
             <div className="md:ml-12">
               <h3 className="text-2xl font-semibold mb-3">
