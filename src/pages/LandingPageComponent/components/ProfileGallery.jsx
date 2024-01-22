@@ -23,7 +23,7 @@ const ProfileGallery = () => {
     }, []);
 
     return (
-        <div className="flex space-x-4">
+        <div className="flex flex-wrap gap-8 max-w-lg">
             {profileImages.map((image, index) => (
                 <img key={index} src={image} alt={`Profile ${index + 1}`} className="w-16 h-16 rounded-full object-cover" />
             ))}
