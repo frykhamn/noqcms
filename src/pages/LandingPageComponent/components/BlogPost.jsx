@@ -3,6 +3,8 @@ function BlogPost() {
     return (
         <section className="bg-bkg-dark text-white p-14 m">
             <h2 className="font-light">Senaste nytt</h2>
+            {/* // Ove's blogpost */}
+            {/* //https://tvivla.se/noq-soker-dig-som-vill-jobba-for-utsatta/ */}
             <div className="flex mt-10 justify-between">
                 <h3>noQ söker dig som vill jobba för utsatta</h3>
                 <h3>17-01-2024</h3>
