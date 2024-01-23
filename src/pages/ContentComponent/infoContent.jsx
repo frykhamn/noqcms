@@ -4,16 +4,16 @@ import { getDocs, collection } from '@firebase/firestore';
 import DeleteContent from './DeleteContent';
 import ArticleForm from './ArticleForm';
 
-const ReadContent = () => {
+const InfoContent = () => {
   const [articles, setArticles] = useState([]);
   const [isCreateMode, setCreateMode] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const articlesCollectionRef = collection(db, 'articles');
+  const infoContentCollectionRef = collection(db, 'infoContent');
 
   const getArticlesList = async () => {
     try {
-      const data = await getDocs(articlesCollectionRef);
+      const data = await getDocs(infoContentCollectionRef);
       const filteredArticles = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -115,4 +115,4 @@ const ReadContent = () => {
   );
 };
 
-export default ReadContent;
+export default InfoContent;

@@ -1,29 +1,30 @@
 import SmallButtonComponent from "./SmallButtonComponent";
+import { useState, useEffect } from 'react';
+import { db } from '../../../services/firebase.config';
+import { getDocs, collection } from '@firebase/firestore';
 
-const dummyData = [
-  {
-    id: 1,
-    title: "Bli Vår partner",
-    text: "Vi tror att en digital lösning för akut hemlösa, härbärgen och handläggare kommer att Erbjuda ett humant och enkelt sätt att hitta en säng för ikväll för brukarna, Skapa enkelhet i administrationen av denna idag manuella process, Öppna upp fler möjligheter att erbjuda sängar och andra tjänster för värdar.",
-  },
-  {
-    id: 2,
-    title: "Produktvision",
-    text: "Vi överväger att utveckla ett slags regelverk som gör att några procent av brukarna kan godkännas direkt med automatik. Tanken är att förenkla för härbärgen. Kan vi förenkla för handläggare på härbärgen och administratörer i arbetet med fakturor och betalningar? Vi ska förstås följa lagar och regelverk kring hantering av personuppgifter.",
-  },
-  {
-    id: 3,
-    title: "Hjälp oss",
-    text: "Vi söker kontakt med er som på nått sätt idag har kontakt med hemlösa. För att kunna skapa en produkt osm går att använta av samtliga led, behöver vi er hjälp med att förstå de som skulle kunna använda den. För att nå målet behöver vi: Utveckla vårt nätverk av brukare och handläggare. Hitta intervjupersoner Kan du bidra med förslag?",
-  },
-  {
-    id: 4,
-    title: "Jobba med oss",
-    text: "Som både ett probono och startup bolag behöver vi all kompetence inom ett IT-projekt. Scrum master, Projektledare, UX-designer, backend- fontend- fullsatck utvecklare? Hör av dig och hör hur du kan bidra. Allt är open source och de flesta kan alltid göra nått.",
-  },
-];
 
 export default function InformationComponent() {
+  const [infoContent, setInfoContent] = useState([]);
+  const infoContentCollectionRef = collection(db, 'infoContent');
+
+  const getInfoContent = async () => {
+    try {
+      const data = await getDocs(infoContentCollectionRef);
+      const fetchedInfoContent = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setInfoContent(fetchedInfoContent);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getInfoContent();
+  }, []);
+
   return (
     <section className="p-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,23 +35,15 @@ export default function InformationComponent() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <InfoCard info={dummyData}></InfoCard>
+          {infoContent.map((item) => (
+            <div key={item.id} className="mb-8">
+              <h3 className="font-semibold mb-8">{item.title}</h3>
+              <p className="pb-6 mb-4">{item.text}</p>
+              <SmallButtonComponent title={item.title}></SmallButtonComponent>
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function InfoCard({ info }) {
-  return (
-    <>
-      {info.map((item) => (
-        <div key={item.id} className="mb-8">
-          <h3 className="font-semibold mb-8">{item.title}</h3>
-          <p className="pb-6 mb-4">{item.text}</p>
-          <SmallButtonComponent title={item.title}></SmallButtonComponent>
-        </div>
-      ))}
-    </>
   );
 }

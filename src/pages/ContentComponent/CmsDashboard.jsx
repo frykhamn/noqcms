@@ -1,4 +1,4 @@
-import ReadContent from "./ReadContent"
+import InfoContent from "./infoContent"
 import NavBar from "./cmsDashboardLayout/NavBar"
 
 const CmsDashboard = () => {
@@ -6,7 +6,7 @@ const CmsDashboard = () => {
     return (
       <div>
         <NavBar />
-        < ReadContent/>
+        < InfoContent/>
       </div>
     )
   }
