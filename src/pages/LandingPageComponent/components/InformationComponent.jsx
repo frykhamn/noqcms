@@ -33,7 +33,6 @@ export default function InformationComponent() {
             En IT-lösning för att hitta<span className="block"> sovplats för natten</span>
           </h2>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {infoContent.map((item) => (
             <div key={item.id} className="mb-8">

@@ -22,8 +22,7 @@ const InfoContent = () => {
       filteredArticles.sort((a, b) => b.dateAdded - a.dateAdded);
       setArticles(filteredArticles);
     } catch (error) {
-      console.error(error);
-    }
+      console.error("Error fetching articles:", error);    }
   };
 
   useEffect(() => {
@@ -79,11 +78,11 @@ const InfoContent = () => {
         {articles.map((article) => (
           <li key={article.id} className="bg-white p-6 rounded-md shadow-md mb-4">
             <h2 className="text-xl font-bold mb-2">{article.title}</h2>
-            <p className="text-gray-700">{article.body}</p>
+            <p className="text-gray-700">{article.text}</p>
             <div className="mt-4 flex justify-between items-center space-x-4">
-              <small className="text-gray-500">
-                {article.dateAdded && article.dateAdded.toDate().toLocaleString()}
-              </small>
+            <small className="text-gray-500">
+              {article.dateAdded ? article.dateAdded.toDate().toLocaleString() : 'N/A'}
+            </small>
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => handleUpdateClick(article)}
