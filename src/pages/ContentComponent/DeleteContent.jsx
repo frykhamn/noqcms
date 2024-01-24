@@ -9,7 +9,7 @@ const DeleteContent = ({ articleId, onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      await deleteDoc(doc(db, 'articles', articleId));
+      await deleteDoc(doc(db, 'infoContent', articleId));
       setIsModalOpen(false);
       onDelete(articleId);
     } catch (error) {

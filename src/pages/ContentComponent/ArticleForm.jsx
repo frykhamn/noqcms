@@ -12,14 +12,19 @@ const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
   const handleAction = async () => {
     try {
       if (isUpdateMode) {
-        const articleRef = doc(db, 'articles', article.id);
+        if (!article.id) {
+          console.error('Error: Article ID is missing.');
+          return;
+        }
+
+        const articleRef = doc(db, 'infoContent', article.id);
         await updateDoc(articleRef, {
           title,
           text,
         });
         onUpdate(); // Notify parent component that update is done
       } else {
-        const newArticleRef = await addDoc(collection(db, 'articles'), {
+        const newArticleRef = await addDoc(collection(db, 'infoContent'), {
           title,
           text,
           dateAdded: serverTimestamp(),
