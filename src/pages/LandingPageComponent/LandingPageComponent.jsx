@@ -40,7 +40,8 @@ const Main = () => {
           videoSrc={aboutData.videoSrc}
           left={true}></Video>
 
-        {/* <BlogPost></BlogPost> */}
+      {/* // Todo Ove's Blogpost cms  */}
+        {/* <BlogPost></BlogPost> */} 
 
         <Video
           content={demoData.text}
