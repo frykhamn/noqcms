@@ -5,23 +5,28 @@ import PropTypes from 'prop-types';
 
 const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : '');
-  const [body, setBody] = useState(article ? article.body : '');
+  const [text, setText] = useState(article ? article.text : '');
 
   const isUpdateMode = !!article;
 
   const handleAction = async () => {
     try {
       if (isUpdateMode) {
-        const articleRef = doc(db, 'articles', article.id);
+        if (!article.id) {
+          console.error('Error: Article ID is missing.');
+          return;
+        }
+
+        const articleRef = doc(db, 'infoContent', article.id);
         await updateDoc(articleRef, {
           title,
-          body,
+          text,
         });
         onUpdate(); // Notify parent component that update is done
       } else {
-        const newArticleRef = await addDoc(collection(db, 'articles'), {
+        const newArticleRef = await addDoc(collection(db, 'infoContent'), {
           title,
-          body,
+          text,
           dateAdded: serverTimestamp(),
           // Add other fields here
         });
@@ -64,10 +69,10 @@ const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
           onChange={(e) => setTitle(e.target.value)}
           className="w-full border p-2 mb-4"
         />
-        <label className="block mb-2">Body:</label>
+        <label className="block mb-2">Text:</label>
         <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           className="w-full border p-2 mb-4"
         ></textarea>
         {/* Add other input fields for img, date, etc. */}
@@ -87,7 +92,7 @@ ArticleForm.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
-    body: PropTypes.string,
+    text: PropTypes.string,
     // Add any other properties as needed
   }),
   onUpdate: PropTypes.func.isRequired,

@@ -1,12 +1,15 @@
-import ReadContent from "./ReadContent"
+import InfoContent from "./infoContent"
 import NavBar from "./cmsDashboardLayout/NavBar"
+import VideoComponent from "./VideoComponent"
+
 
 const CmsDashboard = () => {
 
     return (
       <div>
         <NavBar />
-        < ReadContent/>
+        < InfoContent/>
+        < VideoComponent />
       </div>
     )
   }
