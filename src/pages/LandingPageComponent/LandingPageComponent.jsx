@@ -4,6 +4,7 @@ import HeaderComponent from "./components/HeaderComponent";
 import InformationComponent from "./components/InformationComponent";
 import ProfileGallery from "./components/ProfileGallery";
 import Team from "./components/Team";
+import Post from "./components/Post"
 import Video from "./components/Video";
 
 const LandingComponent = () => {
@@ -34,6 +35,7 @@ const Main = () => {
   return (
     <>
       <main>
+        <Post></Post>
         <InformationComponent></InformationComponent>
         <Video content={aboutData.text}
           title={aboutData.title}
