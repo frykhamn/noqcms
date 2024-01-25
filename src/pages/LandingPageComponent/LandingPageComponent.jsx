@@ -2,7 +2,7 @@ import BlogPost from "./components/BlogPost";
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import InformationComponent from "./components/InformationComponent";
-import ProfileGallery from "./components/ProfileGallery";
+import Post from "./components/Post";
 import Team from "./components/Team";
 import Video from "./components/Video";
 
@@ -39,7 +39,7 @@ const Main = () => {
           title={aboutData.title}
           videoSrc={aboutData.videoSrc}
           left={true}></Video>
-
+<Post></Post>
         <BlogPost></BlogPost>
 
         <Video
