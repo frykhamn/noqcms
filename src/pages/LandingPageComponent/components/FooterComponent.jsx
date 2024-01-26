@@ -20,7 +20,7 @@ const FooterComponent = () => {
           </div>
 
           <div className="my-4 text-">
-            <p>&copy; NoQ, 2024</p>
+            <p>&copy; noQ, 2024</p>
           </div>
         </div>
       </div>
