@@ -14,10 +14,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Build CMS app
-        id: build
-        run: |
-          npm ci && npm run build
+      # - name: Build CMS app
+      #   id: build
+      #   run: |
+      #     npm ci && npm run build
+      #   env:
+      #     VITE_REACT_APP_FIREBASE_API: "AIzaSyCi_S_S3Rw3uueqKJajyvFeQ2ID6VKvmt4"
+      #     VITE_REACT_APP_FIREBASE_DOMAIN: "noq-cms.firebaseapp.com"
+      #     VITE_REACT_APP_FIREBASE_PROJECTID: "noq-cms"
+      #     VITE_REACT_APP_FIREBASE_STORAGE_BUCKET: "noq-cms.appspot.com"
+      #     VITE_REACT_APP_FIREBASE_MESSAGING_SENDERID: "730612274687"
+      #     VITE_REACT_APP_FIREBASE_APPID: "1:730612274687:web:5ba85c6ec4ea08a48683ca"
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         env:
           VITE_REACT_APP_FIREBASE_API: "AIzaSyCi_S_S3Rw3uueqKJajyvFeQ2ID6VKvmt4"
           VITE_REACT_APP_FIREBASE_DOMAIN: "noq-cms.firebaseapp.com"
@@ -25,9 +35,6 @@ jobs:
           VITE_REACT_APP_FIREBASE_STORAGE_BUCKET: "noq-cms.appspot.com"
           VITE_REACT_APP_FIREBASE_MESSAGING_SENDERID: "730612274687"
           VITE_REACT_APP_FIREBASE_APPID: "1:730612274687:web:5ba85c6ec4ea08a48683ca"
-
-      - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOQ_CMS }}'
