@@ -7,6 +7,7 @@ on:
 
 jobs:
   build_and_push:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
 
@@ -16,7 +17,6 @@ jobs:
       - name: Build CMS app
         id: build
         run: |
-          echo "API_KEY: $VITE_REACT_APP_FIREBASE_API"
           npm ci && npm run build
         env:
           VITE_REACT_APP_FIREBASE_API: "AIzaSyCi_S_S3Rw3uueqKJajyvFeQ2ID6VKvmt4"

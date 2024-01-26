@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600&family=Noto+Sans:wght@100;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600&family=Noto+Sans:wght@100;300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400&display=swap');
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -23,7 +23,7 @@ h2 {
 h3 {
     font-size: 24px;
     letter-spacing: 1.5px;
-}   
+}
 
 p {
     font-size: 18px;
