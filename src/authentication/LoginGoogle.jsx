@@ -1,26 +1,47 @@
-import { useState,useEffect } from "react";
-import { signInWithPopup, GoogleAuthProvider,signOut  } from "firebase/auth";
+import { useState, useEffect } from "react";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth, db } from "../services/firebase.config";
-import { collection, doc, getDoc } from '@firebase/firestore';
+import { collection, getDocs } from '@firebase/firestore';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [allowedEmails, setAllowedEmails] = useState([]);
 
   useEffect(() => {
-    // Check if a user is already logged in
-    console.log("Checking user authentication state...");
+    const fetchAllowedEmails = async () => {
+      try {
+        const emailsCollection = collection(db, 'allowedEmails');
+        const querySnapshot = await getDocs(emailsCollection);
+        const emails = querySnapshot.docs.map(doc => doc.data().email);
+        setAllowedEmails(emails);
+      } catch (error) {
+        console.error("Error fetching allowed emails:", error);
+      }
+    };
+
+    // Fetch allowed emails once when component mounts
+    fetchAllowedEmails();
+
+    // Set up listener for authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("User:", user);
+      console.log("Checking user authentication state...");
       if (user) {
         console.log("User is already logged in:", user);
-        navigate("/cmsDashboard");
+        // Check if the user's email is allowed
+        if (allowedEmails.includes(user.email)) {
+          navigate("/cmsDashboard");
+        } else {
+          signOut(auth);
+          setError('Email is not allowed.');
+        }
       }
     });
-    // Cleanup the subscription when the component is unmounted
+
+    // Clean up the subscription when the component unmounts
     return () => unsubscribe();
-  }, [navigate]);
+  }, [navigate, allowedEmails]);
 
   const signInWithGoogle = async () => { 
     try {
@@ -29,25 +50,14 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Check if the user exists in the Firestore collection
-      console.log('db:', db);
-      const userDocRef = doc(collection(db, 'users'), user.uid);
-      console.log('userDocRef:', userDocRef); 
-      const docSnapshot = await getDoc(userDocRef);
-      console.log('docSnapshot:', docSnapshot);
-
-      if (docSnapshot.exists()) {
-        const userData = docSnapshot.data();
-        // Check if the user has the required role
-        if (userData && (userData.role === 'admin' || userData.role === 'cms-user')) {
-          navigate('/cmsDashboard');
-        } else {
-          setError('User does not have the required role.');
-          await signOut(auth);
-        }
+      // Check if the user's email is allowed
+      if (allowedEmails.includes(user.email)) {
+        // Proceed with the user
+        navigate('/cmsDashboard');
       } else {
-        setError('User does not exist in the database.');
+        // Sign out the user and show an error message
         await signOut(auth);
+        setError('Email is not allowed.');
       }
     } catch (error) {
       console.error('Login error:', error.message);
