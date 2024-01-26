@@ -15,7 +15,9 @@ jobs:
 
       - name: Build CMS app
         id: build
-        run: npm ci && npm run build
+        run: |
+          echo "API_KEY: $VITE_REACT_APP_FIREBASE_API"
+          npm ci && npm run build
         env:
           VITE_REACT_APP_FIREBASE_API: "AIzaSyCi_S_S3Rw3uueqKJajyvFeQ2ID6VKvmt4"
           VITE_REACT_APP_FIREBASE_DOMAIN: "noq-cms.firebaseapp.com"
