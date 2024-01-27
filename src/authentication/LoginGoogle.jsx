@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { auth, db } from "../services/firebase.config";
+import { useState, useEffect } from 'react';
+import { signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
+import { auth, db } from '../services/firebase.config';
 import { collection, getDocs } from '@firebase/firestore';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,12 +12,12 @@ const Login = () => {
   useEffect(() => {
     const fetchAllowedEmails = async () => {
       try {
-        const emailsCollection = collection(db, 'allowedEmails');
+        const emailsCollection = collection(db, 'users');
         const querySnapshot = await getDocs(emailsCollection);
-        const emails = querySnapshot.docs.map(doc => doc.data().email);
+        const emails = querySnapshot.docs.map((doc) => doc.data().email);
         setAllowedEmails(emails);
       } catch (error) {
-        console.error("Error fetching allowed emails:", error);
+        console.error('Error fetching allowed emails:', error);
       }
     };
 
@@ -26,12 +26,12 @@ const Login = () => {
 
     // Set up listener for authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("Checking user authentication state...");
+      console.log('Checking user authentication state...');
       if (user) {
-        console.log("User is already logged in:", user);
+        console.log('User is already logged in:', user);
         // Check if the user's email is allowed
         if (allowedEmails.includes(user.email)) {
-          navigate("/cmsDashboard");
+          navigate('/cmsDashboard');
         } else {
           signOut(auth);
           setError('Email is not allowed.');
@@ -43,9 +43,9 @@ const Login = () => {
     return () => unsubscribe();
   }, [navigate, allowedEmails]);
 
-  const signInWithGoogle = async () => { 
+  const signInWithGoogle = async () => {
     try {
-      console.log("Attempting Google sign-in...");
+      console.log('Attempting Google sign-in...');
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
