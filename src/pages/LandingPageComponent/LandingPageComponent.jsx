@@ -35,10 +35,10 @@ const Main = () => {
     <>
       <main>
         <InformationComponent></InformationComponent>
-        <Video content={aboutData.text}
+{/*         <Video content={aboutData.text}
           title={aboutData.title}
           videoSrc={aboutData.videoSrc}
-          left={true}></Video>
+          left={true}></Video> */}
 {/* <Post></Post>
  */}
       {/* // Todo Ove's Blogpost cms  */}
