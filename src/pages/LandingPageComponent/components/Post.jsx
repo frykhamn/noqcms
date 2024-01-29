@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const Post = () => {
   const [latestArticle, setLatestArticle] = useState(null);
 
-  const infoContentCollectionRef = collection(db, 'infoContent');
+  const infoContentCollectionRef = collection(db, 'blog1');
 
   const getLatestArticle = async () => {
     try {
@@ -30,7 +30,7 @@ const Post = () => {
   }, []);
 
   return (
-    <>{latestArticle ? <li>{latestArticle.text}</li> : <p>No articles found.</p>}
+    <>{latestArticle ? <li>{latestArticle.body}</li> : <p>No articles found.</p>}
     </>
   );
 };
