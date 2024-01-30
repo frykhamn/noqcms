@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged  } from 'firebase/auth';
 import { auth, db } from '../services/firebase.config';
 import { collection, getDocs } from '@firebase/firestore';
 import { useNavigate } from 'react-router-dom';
@@ -16,31 +16,25 @@ const LoginGoogle = () => {
         const querySnapshot = await getDocs(emailsCollection);
         const emails = querySnapshot.docs.map((doc) => doc.data().email);
         setAllowedEmails(emails);
-     // Check authentication state only after fetching allowed emails
-     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log('Checking user authentication state...');
+
+      } catch (error) {
+        console.error('Error fetching allowed emails:', error);
+      }
+    };
+
+    fetchAllowedEmails();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log('User is already logged in:', user);
-        if (emails.includes(user.email)) {
-          navigate('/cmsDashboard');
-        } else {
-          signOut(auth);
-          setError('Email is not allowed.');
-        }
+        // Redirect if user is already logged in
+        navigate('/cmsDashboard');
       }
     });
-
-      return () => unsubscribe();
-    } catch (error) {
-      console.error('Error fetching allowed emails:', error);
-    }
-  };
-
-  // Fetch allowed emails once when component mounts
-  fetchAllowedEmails();
-  }, [navigate]); // Added navigate as a dependency to ensure useEffect runs on navigation changes
-
-
+    return () => unsubscribe();
+  }, [navigate]);
+  
   const signInWithGoogle = async () => {
     try {
       console.log('Attempting Google sign-in...');
