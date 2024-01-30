@@ -61,4 +61,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-//['miladissa19@gmail.com','edekar.gaurav@gmail.com','jonathan.fshr@gmail.com', 'frykhamnz@gmail.com', 'ove.holmberg@gmail.com'];
