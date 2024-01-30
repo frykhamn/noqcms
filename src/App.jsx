@@ -10,13 +10,13 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar></Navbar>
-        <Routes basename="/noqcms">
+        <Routes basename="/noq">
           <Route path="/" element={<LandingComponent />} />
           <Route path="/loginCms" element={<LoginGoogle />} />
           <Route path="*" element={<ErrorPage />} />
           {/* Protect the CMS Dashboard route */}
           <Route element={<PrivateRoute />}>
-            <Route element={<CmsDashboard />} path="/cmsDashboard" exact />
+            <Route path="/cmsDashboard" element={<CmsDashboard />}  exact />
           </Route>
         </Routes>
       </BrowserRouter>

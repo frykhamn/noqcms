@@ -7,7 +7,7 @@ import { auth } from '../../../services/firebase.config';
 
 const Navbar = () => {
   const currentUser = auth.currentUser;
-  console.log('currUser' + currentUser);
+  console.log('auth:++ ' + auth.currentUser);
   return (
     <nav className="bg-white w-full mb-4 mt-2">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,3 +70,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+//['miladissa19@gmail.com','edekar.gaurav@gmail.com','jonathan.fshr@gmail.com', 'frykhamnz@gmail.com', 'ove.holmberg@gmail.com'];
