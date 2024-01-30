@@ -41,7 +41,7 @@ const Login = () => {
 
     // Clean up the subscription when the component unmounts
     return () => unsubscribe();
-  }, [navigate, allowedEmails]);
+  }, []);
 
   const signInWithGoogle = async () => {
     try {
