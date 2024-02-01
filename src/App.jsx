@@ -1,4 +1,4 @@
-import CmsDashboard from './pages/ContentComponent/CmsDashboard';
+import ContentDashboard from './pages/ContentComponent/ContentDashboard';
 import LoginGoogle from './authentication/LoginGoogle';
 import LandingComponent from './pages/LandingPageComponent/LandingPageComponent';
 import Navbar from './pages/LandingPageComponent/components/Navbar';
@@ -16,7 +16,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
           {/* Protect the CMS Dashboard route */}
           <Route element={<PrivateRoute />}>
-            <Route path="/cmsDashboard" element={<CmsDashboard />}  exact />
+            <Route path="/dashboard" element={<ContentDashboard />} exact />
           </Route>
         </Routes>
       </BrowserRouter>

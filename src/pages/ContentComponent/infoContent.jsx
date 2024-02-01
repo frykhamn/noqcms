@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useInfoArticlesData from './customHooks/useInfoArticlesData';
-import ArticleForm from './ArticleForm';
-import DeleteContent from './DeleteContent';
+import ArticleForm from './InfoArticleForm';
+import InfoContentDeletion from './InfoContentDeletion';
 import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path based on your Firestore setup
 import db from './../../services/firebase.config';
 const InfoContent = () => {
@@ -60,7 +60,7 @@ const InfoContent = () => {
 
   return (
     <div className="container mx-auto my-8">
-      <h1 className="text-3xl font-bold mb-4">Latest Articles</h1>
+      <h1 className="text-3xl font-bold mb-4">Info Articles</h1>
       <button
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
@@ -93,7 +93,7 @@ const InfoContent = () => {
                   >
                     Update
                   </button>
-                  <DeleteContent
+                  <InfoContentDeletion
                     articleId={article.id}
                     onDelete={handleDelete}
                     className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"

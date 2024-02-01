@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { deleteDoc, doc } from '@firebase/firestore';
 import { db } from '../../services/firebase.config';
 
-const DeleteContent = ({ articleId, onDelete }) => {
+const InfoContentDeletion = ({ articleId, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDelete = async () => {
@@ -51,9 +51,9 @@ const DeleteContent = ({ articleId, onDelete }) => {
   );
 };
 
-DeleteContent.propTypes = {
+InfoContentDeletion.propTypes = {
   articleId: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
-export default DeleteContent;
+export default InfoContentDeletion;

@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged  } from 'firebase/auth';
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { auth, db } from '../services/firebase.config';
 import { collection, getDocs } from '@firebase/firestore';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +21,6 @@ const LoginGoogle = () => {
         const querySnapshot = await getDocs(emailsCollection);
         const emails = querySnapshot.docs.map((doc) => doc.data().email);
         setAllowedEmails(emails);
-
       } catch (error) {
         console.error('Error fetching allowed emails:', error);
       }
@@ -29,12 +33,12 @@ const LoginGoogle = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // Redirect if user is already logged in
-        navigate('/cmsDashboard');
+        navigate('/dashboard');
       }
     });
     return () => unsubscribe();
   }, [navigate]);
-  
+
   const signInWithGoogle = async () => {
     try {
       console.log('Attempting Google sign-in...');
@@ -45,7 +49,7 @@ const LoginGoogle = () => {
       // Check if the user's email is allowed
       if (allowedEmails.includes(user.email)) {
         // Proceed with the user
-        navigate('/cmsDashboard');
+        navigate('/dashboard');
       } else {
         // Sign out the user and show an error message
         await signOut(auth);

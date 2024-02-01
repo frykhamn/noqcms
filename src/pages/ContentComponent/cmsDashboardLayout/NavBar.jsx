@@ -12,8 +12,8 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/cmsDashboard" className="text-white hover:underline">
-            CMS Dashboard
+          <Link to="/dashboard" className="text-white hover:underline">
+            ContentDashboard
           </Link>
         </li> */}
         <li>
