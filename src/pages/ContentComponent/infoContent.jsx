@@ -4,6 +4,7 @@ import ArticleForm from './InfoArticleForm';
 import InfoContentDeletion from './InfoContentDeletion';
 import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path based on your Firestore setup
 import db from './../../services/firebase.config';
+import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
 const InfoContent = () => {
   const { loading, error, articles: infoArticles } = useInfoArticlesData();
   const [selectedArticle, setSelectedArticle] = useState(null);
@@ -59,8 +60,7 @@ const InfoContent = () => {
   };
 
   return (
-    <div className="container mx-auto my-8">
-      <h1 className="text-3xl font-bold mb-4">Info Articles</h1>
+    <CollapsibleContainer title="Info Articles">
       <button
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
@@ -112,7 +112,7 @@ const InfoContent = () => {
           onCancel={handleCancel}
         />
       )}
-    </div>
+    </CollapsibleContainer>
   );
 };
 
