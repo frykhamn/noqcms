@@ -1,4 +1,3 @@
-// DeleteContent.js
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { deleteDoc, doc } from '@firebase/firestore';
@@ -11,7 +10,7 @@ const DeleteContent = ({ articleId, onDelete }) => {
     try {
       await deleteDoc(doc(db, 'infoContent', articleId));
       setIsModalOpen(false);
-      onDelete(articleId);
+      onDelete(articleId); // Notify parent component about the deletion
     } catch (error) {
       console.error('Error deleting article:', error);
     }
@@ -25,11 +24,12 @@ const DeleteContent = ({ articleId, onDelete }) => {
       >
         Delete
       </button>
-
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-4 rounded-md shadow-md">
-            <p className="text-lg text-gray-800 mb-4">Are you sure you want to delete this article?</p>
+            <p className="text-lg text-gray-800 mb-4">
+              Are you sure you want to delete this article?
+            </p>
             <div className="flex justify-end">
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-md mr-2"
@@ -50,8 +50,10 @@ const DeleteContent = ({ articleId, onDelete }) => {
     </>
   );
 };
+
 DeleteContent.propTypes = {
   articleId: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
+
 export default DeleteContent;

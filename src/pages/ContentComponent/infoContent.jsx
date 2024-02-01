@@ -1,37 +1,52 @@
 import { useState, useEffect } from 'react';
-import { db } from '../../services/firebase.config';
-import { getDocs, collection } from '@firebase/firestore';
-import DeleteContent from './DeleteContent';
+import useInfoArticlesData from './customHooks/useInfoArticlesData';
 import ArticleForm from './ArticleForm';
-
+import DeleteContent from './DeleteContent';
+import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path based on your Firestore setup
+import db from './../../services/firebase.config';
 const InfoContent = () => {
-  const [articles, setArticles] = useState([]);
-  const [isCreateMode, setCreateMode] = useState(false);
+  const { loading, error, articles: infoArticles } = useInfoArticlesData();
   const [selectedArticle, setSelectedArticle] = useState(null);
-
-  const infoContentCollectionRef = collection(db, 'infoContent');
-
-  const getArticlesList = async () => {
-    try {
-      const data = await getDocs(infoContentCollectionRef);
-      const filteredArticles = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      // sorting based on dateAdded
-      filteredArticles.sort((a, b) => b.dateAdded - a.dateAdded);
-      setArticles(filteredArticles);
-    } catch (error) {
-      console.error("Error fetching articles:", error);    }
-  };
+  const [isCreateMode, setCreateMode] = useState(false);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    getArticlesList();
-  }, []);
+    setArticles(infoArticles);
+  }, [infoArticles]);
 
-  const handleDelete = (deletedArticleId) => {
-    // Update state to remove the deleted article
-    setArticles((prevArticles) => prevArticles.filter((article) => article.id !== deletedArticleId));
+  const handleDelete = async (deletedArticleId) => {
+    try {
+      setSelectedArticle(null);
+      const newArticles = articles.filter(
+        (article) => article.id !== deletedArticleId
+      );
+      setArticles(newArticles);
+      await deleteArticleFromFirestore(deletedArticleId);
+    } catch (error) {
+      console.error('Error deleting article:', error);
+      // Handle errors here, such as displaying a notification to the user
+    }
+  };
+
+  const deleteArticleFromFirestore = async (articleId) => {
+    try {
+      // Implement Firestore deletion logic here
+      await deleteDoc(doc(db, 'infoContent', articleId)); // Ensure 'db' is properly imported from your Firebase configuration
+    } catch (error) {
+      console.error('Error deleting article from Firestore:', error);
+    }
+  };
+
+  const handleUpdateDone = () => {
+    setSelectedArticle(null);
+  };
+
+  const handleCreateDone = () => {
+    setCreateMode(false);
+  };
+
+  const handleCreateClick = () => {
+    setCreateMode(true);
   };
 
   const handleUpdateClick = (article) => {
@@ -39,69 +54,56 @@ const InfoContent = () => {
   };
 
   const handleCancel = () => {
-    // Reset selected article and create mode when canceling
     setSelectedArticle(null);
     setCreateMode(false);
-  };
-
-  const handleUpdateDone = () => {
-    // Reset selected article after update is done
-    setSelectedArticle(null);
-    // Refresh the articles list
-    getArticlesList();
-  };
-
-  const handleCreateClick = () => {
-    setCreateMode(true);
-  };
-
-  const handleCreateDone = () => {
-    // Reset create mode after new article is created
-    setCreateMode(false);
-    // Refresh the articles list
-    getArticlesList();
   };
 
   return (
     <div className="container mx-auto my-8">
       <h1 className="text-3xl font-bold mb-4">Latest Articles</h1>
-
-      {/* Style for Create Article button */}
       <button
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
       >
         Create Article
       </button>
-
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
-        {articles.map((article) => (
-          <li key={article.id} className="bg-white p-6 rounded-md shadow-md mb-4">
-            <h2 className="text-xl font-bold mb-2">{article.title}</h2>
-            <p className="text-gray-700">{article.text}</p>
-            <div className="mt-4 flex justify-between items-center space-x-4">
-            <small className="text-gray-500">
-              {article.dateAdded ? article.dateAdded.toDate().toLocaleString() : 'N/A'}
-            </small>
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => handleUpdateClick(article)}
-                  className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                >
-                  Update
-                </button>
-                <DeleteContent
-                  articleId={article.id}
-                  onDelete={handleDelete}
-                  className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
-                />
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>Error: {error}</div>
+        ) : (
+          articles.map((article) => (
+            <li
+              key={article.id}
+              className="bg-white p-6 rounded-md shadow-md mb-4"
+            >
+              <h2 className="text-xl font-bold mb-2">{article.title}</h2>
+              <p className="text-gray-700">{article.text}</p>
+              <div className="mt-4 flex justify-between items-center space-x-4">
+                <small className="text-gray-500">
+                  {article.dateAdded
+                    ? article.dateAdded.toDate().toLocaleString()
+                    : 'N/A'}
+                </small>
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={() => handleUpdateClick(article)}
+                    className="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                  >
+                    Update
+                  </button>
+                  <DeleteContent
+                    articleId={article.id}
+                    onDelete={handleDelete}
+                    className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
+                  />
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))
+        )}
       </ul>
-
-      {/* Render ArticleForm when an article is selected for update or in create mode */}
       {(selectedArticle || isCreateMode) && (
         <ArticleForm
           article={selectedArticle}
