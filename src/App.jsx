@@ -5,6 +5,7 @@ import Navbar from './pages/LandingPageComponent/components/Navbar';
 import ErrorPage from './pages/ErrorPages/ErrorPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './authentication/PrivateRoute';
+import JobbaMedOssPage from './pages/LandingPageComponent/components/JobbaMedOssPage';
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<LandingComponent />} />
           <Route path="/loginCms" element={<LoginGoogle />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/jobba-med-oss" element={<JobbaMedOssPage />} />
           {/* Protect the CMS Dashboard route */}
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<ContentDashboard />} exact />
