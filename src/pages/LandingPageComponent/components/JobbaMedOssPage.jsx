@@ -1,9 +1,17 @@
 // JobbaMedOssPage.js
 import 'tailwindcss/tailwind.css';
-
+import FooterComponent from "./FooterComponent";
 const JobbaMedOssPage = () => {
+
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div>
+      <img
+        className="w-full h-auto"
+        src="/src/assets/images/3pwolvay.bmp"
+        alt="Header Image"
+      />
+      <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">
         noQ söker dig som vill jobba för utsatta
       </h1>
@@ -50,15 +58,18 @@ const JobbaMedOssPage = () => {
         <p>Tid kommer och tid går. Kan du inte bidra med något den kommande perioden/sprinten säger du bara det, så lägger vi dig på väntelistan tills du har tid igen. Vill du hoppa av så har vi en process för det utan problem.</p>
         </div>
         <h3 className="text-lg font-bold mb-2">Verktyg</h3>
-        <p>Vi tillhandahåller all mjukvara i form av licenser och behörigheter, du ansvarar för din egen arbetsmiljö inklusive hårdvara (dator mm).</p>
+        <p className='mb-2'>Vi tillhandahåller all mjukvara i form av licenser och behörigheter, du ansvarar för din egen arbetsmiljö inklusive hårdvara (dator mm).</p>
         <h3 className="text-lg font-bold mb-2">Notera!</h3>
-        <p>Det här är inte en betald tjänst. Alla VI jobbar för att hjälpa utsatta människor, bredda våra nätverk och kanske lära sig något användbart. Vi kommer under 2024 samarbeta med arbetsförmedlingen som en möjlighet till praktikplats.</p>
+        <p className='mb-2'>Det här är inte en betald tjänst. Alla VI jobbar för att hjälpa utsatta människor, bredda våra nätverk och kanske lära sig något användbart. Vi kommer under 2024 samarbeta med arbetsförmedlingen som en möjlighet till praktikplats.</p>
         <h3 className="text-lg font-bold mb-2">Ansök!</h3>
-        <p>Intresse? Boka en tid med Ove Holmberg, projektledare här: Oves tider – Ove Holmberg. Bara lite nyfiken? Anmäl dig till vår nästa demo här.</p>
+        <p className='mb-2'>Intresse? Boka en tid med Ove Holmberg, projektledare här: <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0usphB5W1haAqpl3EODAd3szLZLOMCTq-ggW3X9HeszLYZHClDvu87mgmv_8JFpip6QZY_OXiU" className="text-blue-500 underline">Oves tider – Ove Holmberg.</a> Bara lite nyfiken? Anmäl dig till vår nästa demo <a href="https://docs.google.com/forms/d/e/1FAIpQLSe10wrCIeZeCDgvpkgXHKPxMb2ou1HFdRRnlaArfb0NWfW7SQ/viewform" className="text-blue-500 underline">här</a>.</p>
         <h3 className="text-lg font-bold mb-2">Vi är noQ</h3>
-        <p>noQ är ett team som primärt vill hjälpa hemlösa i Stockholm men på sikt alla utsatta i Sverige. Vårt mål är noll akut hemlösa i Stockholm 2024. Vi jobbar med teknik som drivs av artificiell intelligens men vi söker även andra kompetenser och engagerade som vill vara med i vår vision mot noll utsatta i samhället.</p>
+        <p className='mb-2'>noQ är ett team som primärt vill hjälpa hemlösa i Stockholm men på sikt alla utsatta i Sverige. Vårt mål är noll akut hemlösa i Stockholm 2024. Vi jobbar med teknik som drivs av artificiell intelligens men vi söker även andra kompetenser och engagerade som vill vara med i vår vision mot noll utsatta i samhället.</p>
         <p className="text-gray-500">ps. Vi söker även partners och sponsorer</p>
     </div>
+    <FooterComponent />
+  </div>
+    
   )
 };
 
