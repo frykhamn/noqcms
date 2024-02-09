@@ -6,10 +6,12 @@ import ErrorPage from './pages/ErrorPages/ErrorPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './authentication/PrivateRoute';
 import JobbaMedOssPage from './pages/LandingPageComponent/components/JobbaMedOssPage';
+import { AuthProvider } from './authentication/AuthProvider';
 function App() {
   return (
     <>
       <BrowserRouter>
+      <AuthProvider>
         <Navbar></Navbar>
         <Routes basename="/noq">
           <Route path="/" element={<LandingComponent />} />
@@ -21,6 +23,7 @@ function App() {
             <Route path="/dashboard" element={<ContentDashboard />} exact />
           </Route>
         </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </>
   );

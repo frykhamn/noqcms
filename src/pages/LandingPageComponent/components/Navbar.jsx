@@ -1,10 +1,12 @@
 import logo from '../../../assets/images/logo.png';
 import SmallButtonComponent from './SmallButtonComponent';
 import { Link } from 'react-router-dom';
-
-/* todo: nav links from dummydata -> firebase */
+import { useContext } from 'react';
+import {AuthContext} from '../../../authentication/AuthProvider';
 
 const Navbar = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <nav className="bg-white w-full mb-4 mt-2">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +52,7 @@ const Navbar = () => {
               </a>
             </div>
             <Link to="/loginCms" className="flex items-center justify-center">
-              <SmallButtonComponent title={'Logga in'}></SmallButtonComponent>
+              <SmallButtonComponent title={isLoggedIn ? 'CMS Sidan': 'Logga In'} />
             </Link>
           </div>
         </div>

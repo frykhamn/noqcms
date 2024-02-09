@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from './AuthProvider';
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -10,6 +11,7 @@ import { collection, getDocs } from '@firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 const LoginGoogle = () => {
+  const { handleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [allowedEmails, setAllowedEmails] = useState([]);
@@ -45,11 +47,12 @@ const LoginGoogle = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
       // Check if the user's email is allowed
       if (allowedEmails.includes(user.email)) {
         // Proceed with the user
         navigate('/dashboard');
+        handleLogin();
+
       } else {
         // Sign out the user and show an error message
         await signOut(auth);
