@@ -32,7 +32,7 @@ const HeaderComponent = () => {
                         rel="noreferrer"
                     >
 
-                        <BigButton variant={"secondary"} title={"Bli Temamedlem"}>
+                        <BigButton variant={"secondary"} title={"Bli Teammedlem"}>
                         </BigButton>
                     </a>
                 </div>
