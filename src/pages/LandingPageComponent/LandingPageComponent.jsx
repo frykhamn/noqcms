@@ -5,6 +5,7 @@ import InformationComponent from "./components/InformationComponent";
 import Post from "./components/Post";
 import Team from "./components/Team";
 import Video from "./components/Video";
+import BliVårPartner from "./components/BliVårPartnerSida";
 
 const LandingComponent = () => {
   return (

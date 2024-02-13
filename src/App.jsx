@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './authentication/PrivateRoute';
 import JobbaMedOssPage from './pages/LandingPageComponent/components/JobbaMedOssPage';
 import { AuthProvider } from './authentication/AuthProvider';
+import BliVårPartner from './pages/LandingPageComponent/components/BliVårPartnerSida';
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
         <Routes basename="/noq">
           <Route path="/" element={<LandingComponent />} />
           <Route path="/loginCms" element={<LoginGoogle />} />
+          <Route path="/bli-vår-partner" element={<BliVårPartner />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/jobba-med-oss" element={<JobbaMedOssPage />} />
           {/* Protect the CMS Dashboard route */}
