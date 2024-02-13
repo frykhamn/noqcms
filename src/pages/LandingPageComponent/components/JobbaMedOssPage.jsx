@@ -5,7 +5,7 @@ const JobbaMedOssPage = () => {
 
 
   return (
-    <div>
+    <div className="bg-bkg-light">
       <img
         className="w-full h-auto"
         src="/src/assets/images/3pwolvay.bmp"
