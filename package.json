@@ -54,6 +54,8 @@
 
     "react-dom": "^18.2.0",
 
+    "react-player": "^2.14.1",
+
     "react-router-dom": "^6.21.1",
 
     "typeface-montserrat": "^1.1.13"

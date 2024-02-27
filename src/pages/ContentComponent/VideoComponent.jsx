@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import useVideoData from "./VideoComponentForm"; // Ensure the path is correct
+import React, { useState } from 'react';
+import ReactPlayer from 'react-player'; // Import React Player
+import useVideoData from './VideoComponentForm'; // Ensure the path is correct
 
 function VideoComponent() {
   const { videos, updateVideo } = useVideoData();
@@ -19,29 +20,13 @@ function VideoComponent() {
     }));
   };
 
-  // Function to extract YouTube video ID from a URL
-  function extractYouTubeID(url) {
-    const regExp =
-      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return match && match[7].length === 11 ? match[7] : null;
-  }
-
-  // Debug: Log the extracted YouTube ID to verify correctness
-  const debugYouTubeIDExtraction = (url) => {
-    const id = extractYouTubeID(url);
-    console.log("Extracted YouTube ID:", id); // Check the console to see the output
-    return id;
-  };
-
   // Submit form data for update
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editVideoId) {
-      const videoID = extractYouTubeID(videoFormData.videoSrc);
       const updatedData = {
         ...videoFormData,
-        videoSrc: videoID, // Store only the video ID
+        // No need to modify videoSrc here since React Player uses the full URL
       };
       await updateVideo(editVideoId, updatedData);
       setEditVideoId(null); // Reset edit state
@@ -82,17 +67,13 @@ function VideoComponent() {
       {/* List of Videos */}
       {videos.map((video) => (
         <div key={video.id}>
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${extractYouTubeID(
-              video.videoSrc
-            )}`}
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
+          <ReactPlayer
+            url={video.videoSrc} // Use the full URL directly
+            className='react-player'
+            controls={true}
+            width='100%'
+            height='100%'
+          />
           <button
             onClick={() => {
               setEditVideoId(video.id);
