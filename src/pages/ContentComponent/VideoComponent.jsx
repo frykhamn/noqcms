@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ReactPlayer from 'react-player'; // Import React Player
 import useVideoData from './VideoComponentForm'; // Ensure the path is correct
+import Video from '../LandingPageComponent/components/Video'; // Adjust the import path as necessary
 
 function VideoComponent() {
   const { videos, updateVideo } = useVideoData();
@@ -26,7 +26,6 @@ function VideoComponent() {
     if (editVideoId) {
       const updatedData = {
         ...videoFormData,
-        // No need to modify videoSrc here since React Player uses the full URL
       };
       await updateVideo(editVideoId, updatedData);
       setEditVideoId(null); // Reset edit state
@@ -65,14 +64,13 @@ function VideoComponent() {
       )}
 
       {/* List of Videos */}
-      {videos.map((video) => (
-        <div key={video.id}>
-          <ReactPlayer
-            url={video.videoSrc} // Use the full URL directly
-            className='react-player'
-            controls={true}
-            width='100%'
-            height='100%'
+      {videos.map((video, index) => (
+        <div key={video.id} className="mb-8">
+          <Video
+            title={video.title}
+            content={video.text}
+            videoSrc={video.videoSrc}
+            left={index % 2 === 0} // Assuming 'left' is a prop that determines the styling or layout
           />
           <button
             onClick={() => {
@@ -83,7 +81,7 @@ function VideoComponent() {
                 videoSrc: video.videoSrc,
               });
             }}
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="mt-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
             Edit
           </button>

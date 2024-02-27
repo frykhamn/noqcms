@@ -1,6 +1,7 @@
+import React from 'react';
+import ReactPlayer from 'react-player';
 
 function Video({ content, title, videoSrc, left }) {
-
     const marginLeft = left ? 'ml-10 mb-10 lg:mr-4' : 'ml-10 mt-10';
     const colorLeft = left ? 'bg-white' : 'bg-bkg-light';
 
@@ -16,14 +17,17 @@ function Video({ content, title, videoSrc, left }) {
                     </p>
                 </div>
                 <div className={`p-10 col-span-12 h-96 sm:h-[32rem] lg:col-span-7 ${left && 'order-first'}`}>
-                    <iframe
-                        src={videoSrc}
+                    <ReactPlayer
+                        url={videoSrc}
                         className="size-full"
-                    ></iframe>
+                        width="100%"
+                        height="100%"
+                        controls={true}
+                    />
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Video
+export default Video;
