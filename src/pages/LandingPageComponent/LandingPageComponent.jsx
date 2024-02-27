@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import { collection, getDocs } from '@firebase/firestore';
+import { db } from '../../services/firebase.config'; // Import your Firebase config
+
 import BlogPost from "./components/BlogPost";
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
@@ -7,10 +11,30 @@ import Team from "./components/Team";
 import Video from "./components/Video";
 
 const LandingComponent = () => {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const videosCollectionRef = collection(db, 'videoLinkCollection');
+        const data = await getDocs(videosCollectionRef);
+        const fetchedVideos = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setVideos(fetchedVideos);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
   return (
     <div>
       <HeaderComponent></HeaderComponent>
-      <Main></Main>
+      <Main videos={videos}></Main>
       <FooterComponent></FooterComponent>
     </div>
   );
@@ -20,7 +44,8 @@ const demoData =
 {
   title: "Demo inspelning",
   text: "Från den 15/12 - 2023. Vi presenterar NoQ-gänget och går igenom varför vi gör det här samt vad våra förhoppningar är. Disskutioner om värdefull och nödvändig feedback kring produkten, dess syfte, användningsområde samt vilka problem den kan lösa.",
-  videoSrc: "https://drive.google.com/file/d/1DcezvhiJ3QRuydUTvxG8zZlm9EsrS-Zk/preview"
+  // videoSrc: "https://drive.google.com/file/d/1DcezvhiJ3QRuydUTvxG8zZlm9EsrS-Zk/preview"
+  videoSrc: "https://youtu.be/WnBojfIfds8"
 };
 
 const aboutData =
@@ -30,30 +55,23 @@ const aboutData =
   videoSrc: "https://youtu.be/WnBojfIfds8"
 };
 
-const Main = () => {
+const Main = ({ videos }) => {
   return (
     <>
       <main>
         <InformationComponent></InformationComponent>
-{/*         <Video content={aboutData.text}
-          title={aboutData.title}
-          videoSrc={aboutData.videoSrc}
-          left={true}></Video> */}
-{/* <Post></Post>
- */}
-      {/* // Todo Ove's Blogpost cms  */}
-        {/* <BlogPost></BlogPost> */} 
 
-        <Video
-          content={demoData.text}
-          title={demoData.title}
-          videoSrc={demoData.videoSrc}
-          left={false}
-        ></Video>
+        {videos.map((video) => (
+          <Video
+            key={video.id}
+            content={video.text}
+            title={video.title}
+            videoSrc={video.videoSrc}
+            left={false}
+          />
+        ))}
 
         <Team></Team>
-
-
 
       </main>
     </>
