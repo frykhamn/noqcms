@@ -1,73 +1,110 @@
-// VideoComponent.jsx
-import React from 'react';
-import { useState, useEffect } from 'react';
-import useVideoData from './VideoComponentForm';
-import Video from '../LandingPageComponent/components/Video';
+import React, { useState } from "react";
+import useVideoData from "./VideoComponentForm"; // Ensure the path is correct
 
 function VideoComponent() {
-  const {videos, addVideo, updateVideo, deleteVideo} = useVideoData();
+  const { videos, updateVideo } = useVideoData();
   const [editVideoId, setEditVideoId] = useState(null);
-  const [videoFormData, setVideoFormData] = useState({ title: '', text: '', videoSrc: '' });
+  const [videoFormData, setVideoFormData] = useState({
+    title: "",
+    text: "",
+    videoSrc: "",
+  });
 
   // Handle change for form inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setVideoFormData(prevState => ({
+    setVideoFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  // Submit form data for add or update
+  // Function to extract YouTube video ID from a URL
+  function extractYouTubeID(url) {
+    const regExp =
+      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return match && match[7].length === 11 ? match[7] : null;
+  }
+
+  // Debug: Log the extracted YouTube ID to verify correctness
+  const debugYouTubeIDExtraction = (url) => {
+    const id = extractYouTubeID(url);
+    console.log("Extracted YouTube ID:", id); // Check the console to see the output
+    return id;
+  };
+
+  // Submit form data for update
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editVideoId) {
-      await updateVideo(editVideoId, videoFormData);
-    } else {
-      await addVideo(videoFormData);
+      const videoID = extractYouTubeID(videoFormData.videoSrc);
+      const updatedData = {
+        ...videoFormData,
+        videoSrc: videoID, // Store only the video ID
+      };
+      await updateVideo(editVideoId, updatedData);
+      setEditVideoId(null); // Reset edit state
+      setVideoFormData({ title: "", text: "", videoSrc: "" }); // Clear form
     }
-    setEditVideoId(null); // Reset edit state
-    setVideoFormData({ title: '', text: '', videoSrc: '' }); // Clear form
   };
 
   return (
     <>
-      {/* Video Form for Adding/Editing */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Video Title"
-          value={videoFormData.title}
-          onChange={handleChange} />
-        <input
-          type="text"
-          name="text"
-          placeholder="Video Description"
-          value={videoFormData.text}
-          onChange={handleChange} />
-        <input
-          type="text"
-          name="videoSrc"
-          placeholder="Video Source URL"
-          value={videoFormData.videoSrc}
-          onChange={handleChange} />
-        <button type="submit">{editVideoId ? 'Update Video' : 'Add Video'}</button>
-      </form>
+      {/* Video Form for Editing */}
+      {editVideoId && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="title"
+            placeholder="Video Title"
+            value={videoFormData.title}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="text"
+            placeholder="Video Description"
+            value={videoFormData.text}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="videoSrc"
+            placeholder="YouTube Video URL"
+            value={videoFormData.videoSrc}
+            onChange={handleChange}
+          />
+          <button type="submit">Update Video</button>
+        </form>
+      )}
 
       {/* List of Videos */}
       {videos.map((video) => (
         <div key={video.id}>
-          <Video
-            title={video.title}
-            content={video.text}
-            videoSrc={video.videoSrc}
-            left={false} />
-          <button onClick={() => {
-            setEditVideoId(video.id);
-            setVideoFormData({ title: video.title, text: video.text, videoSrc: video.videoSrc });
-          } }>Edit</button>
-          <button onClick={() => deleteVideo(video.id)}>Delete</button>
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${extractYouTubeID(
+              video.videoSrc
+            )}`}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+          <button
+            onClick={() => {
+              setEditVideoId(video.id);
+              setVideoFormData({
+                title: video.title,
+                text: video.text,
+                videoSrc: video.videoSrc,
+              });
+            }}
+          >
+            Edit
+          </button>
         </div>
       ))}
     </>
