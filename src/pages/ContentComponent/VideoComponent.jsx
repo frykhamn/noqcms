@@ -60,7 +60,7 @@ function VideoComponent() {
             value={videoFormData.videoSrc}
             onChange={handleChange}
           />
-          <button type="submit">Update Video</button>
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Video</button>
         </form>
       )}
 
@@ -83,6 +83,7 @@ function VideoComponent() {
                 videoSrc: video.videoSrc,
               });
             }}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
             Edit
           </button>
