@@ -19,7 +19,7 @@ const HeaderComponent = () => {
 
             <div className="text-white p-4">
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-noto mb-4 md:text-5xl xl:text-7xl">
-                    <span className='block mb-4'> Ingen ska behöva</span> <span className='block mb-8'>sova ute</span>
+                    <span className='block mb-4'> noQ jobbar för noll utsatta</span> <span className='block mb-8'> Ingen ska behöva sova ute </span>
                 </h1>
                 <div className="flex flex-col md:flex-row gap-4">
                     <Link to={"/partner"}>
