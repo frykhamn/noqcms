@@ -6,6 +6,8 @@ import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path b
 import db from '../../services/firebase.config';
 import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
 
+// Info Aricles Section
+// Here we display the four articles. We use customHook useInfoArticlesData to retrieve the articles from Firestore.
 
 
 const InfoArticles = () => {
@@ -28,35 +30,35 @@ const InfoArticles = () => {
       await deleteArticleFromFirestore(deletedArticleId);
     } catch (error) {
       console.error('Error deleting article:', error);
-      // Handle errors here, such as displaying a notification to the user
     }
   };
 
   const deleteArticleFromFirestore = async (articleId) => {
     try {
       // Implement Firestore deletion logic here
-      await deleteDoc(doc(db, 'infoContent', articleId)); // Ensure 'db' is properly imported from your Firebase configuration
+      await deleteDoc(doc(db, 'infoContent', articleId));
     } catch (error) {
       console.error('Error deleting article from Firestore:', error);
     }
   };
 
+  //Resets the selected article after an update operation.
   const handleUpdateDone = () => {
     setSelectedArticle(null);
   };
-
+  // Sets the create mode to false after creating a new article.
   const handleCreateDone = () => {
     setCreateMode(false);
   };
-
+  // Sets the create mode to true to initiate article creation.
   const handleCreateClick = () => {
     setCreateMode(true);
   };
-
+  // Sets the selected article for update operation.
   const handleUpdateClick = (article) => {
     setSelectedArticle(article);
   };
-
+  // Cancels the article creation or update operation.
   const handleCancel = () => {
     setSelectedArticle(null);
     setCreateMode(false);

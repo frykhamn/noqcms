@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+// CollapsibleContainer is a component that is used to display anything in a collapsible container.
+
 const CollapsibleContainer = ({ title, children }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
