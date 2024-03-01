@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import useInfoArticlesData from './customHooks/useInfoArticlesData';
 import ArticleForm from './InfoArticleForm';
-import InfoContentDeletion from './InfoContentDeletion';
+import InfoArticlesDeletion from './InfoArticlesDeletion';
 import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path based on your Firestore setup
-import db from './../../services/firebase.config';
+import db from '../../services/firebase.config';
 import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
-const InfoContent = () => {
+
+
+
+const InfoArticles = () => {
   const { loading, error, articles: infoArticles } = useInfoArticlesData();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isCreateMode, setCreateMode] = useState(false);
@@ -93,7 +96,7 @@ const InfoContent = () => {
                   >
                     Update
                   </button>
-                  <InfoContentDeletion
+                  <InfoArticlesDeletion
                     articleId={article.id}
                     onDelete={handleDelete}
                     className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
@@ -116,4 +119,4 @@ const InfoContent = () => {
   );
 };
 
-export default InfoContent;
+export default InfoArticles;

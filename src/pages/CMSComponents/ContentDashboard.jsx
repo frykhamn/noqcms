@@ -1,4 +1,4 @@
-import InfoContent from './infoContent';
+import InfoArticles from './infoArticles';
 import NavBar from './cmsDashboardLayout/NavBar';
 import VideoComponent from './VideoComponent';
 
@@ -7,7 +7,7 @@ const ContentDashboard = () => {
     <div>
       <NavBar />
       {/* change name to Info Article? */}
-      <InfoContent /> 
+      <InfoArticles /> 
       {/* NoQ Demo Video */}
       <VideoComponent />
     </div>
