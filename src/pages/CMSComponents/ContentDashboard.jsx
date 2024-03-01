@@ -1,4 +1,4 @@
-import InfoArticles from './infoArticles';
+import InfoArticles from './InfoArticles';
 import NavBar from './cmsDashboardLayout/NavBar';
 import VideoComponent from './VideoComponent';
 
@@ -6,7 +6,7 @@ const ContentDashboard = () => {
   return (
     <div>
       <NavBar />
-      <InfoArticles /> 
+      <InfoArticles />
       {/* NoQ Demo Video Component*/}
       <VideoComponent />
     </div>
