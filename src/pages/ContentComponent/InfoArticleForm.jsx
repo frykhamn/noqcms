@@ -8,6 +8,9 @@ import {
   serverTimestamp,
 } from '@firebase/firestore';
 import PropTypes from 'prop-types';
+// In CMS
+// In the "Info Articles" section, when you press Create Article or Update 
+// the code below pops out a window that lets the user create or update using the form.
 
 const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : '');
