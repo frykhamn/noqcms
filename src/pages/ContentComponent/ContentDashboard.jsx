@@ -6,7 +6,9 @@ const ContentDashboard = () => {
   return (
     <div>
       <NavBar />
-      <InfoContent />
+      {/* change name to Info Article? */}
+      <InfoContent /> 
+      {/* NoQ Demo Video */}
       <VideoComponent />
     </div>
   );
