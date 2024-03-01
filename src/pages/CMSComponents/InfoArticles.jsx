@@ -1,51 +1,59 @@
 import { useState, useEffect } from 'react';
-import useInfoArticlesData from './customHooks/useInfoArticlesData';
+import useCrud from './customHooks/useCrud';
+import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
 import ArticleForm from './InfoArticleForm';
 import InfoArticlesDeletion from './InfoArticlesDeletion';
 import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path based on your Firestore setup
 import db from '../../services/firebase.config';
-import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
+import useInfoArticlesData from './customHooks/useInfoArticlesData';
 
-// Info Aricles Section
-// Here we display the four articles. We use customHook useInfoArticlesData to retrieve the articles from Firestore.
-
+// In CMS page, in info Aricles tab
+// We display the four articles using the code here. We use customHook useInfoArticlesData to retrieve the articles from Firestore.
 
 const InfoArticles = () => {
-  const { loading, error, articles: infoArticles } = useInfoArticlesData();
+  const {
+    loading,
+    error,
+    data: articles,
+    deleteItem: deleteArticle,
+  } = useCrud('infoContent');
+
+  // const { loading, error, articles: infoArticles } = useInfoArticlesData();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isCreateMode, setCreateMode] = useState(false);
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
 
-  useEffect(() => {
-    setArticles(infoArticles);
-  }, [infoArticles]);
+  // useEffect(() => {
+  //   setArticles(infoArticles);
+  // }, [infoArticles]);
 
   const handleDelete = async (deletedArticleId) => {
     try {
+      await deleteArticle(deletedArticleId);
       setSelectedArticle(null);
-      const newArticles = articles.filter(
-        (article) => article.id !== deletedArticleId
-      );
-      setArticles(newArticles);
-      await deleteArticleFromFirestore(deletedArticleId);
+      // const newArticles = articles.filter(
+      //   (article) => article.id !== deletedArticleId
+      // );
+      // setArticles(newArticles);
+      // await deleteArticleFromFirestore(deletedArticleId);
     } catch (error) {
       console.error('Error deleting article:', error);
     }
   };
 
-  const deleteArticleFromFirestore = async (articleId) => {
-    try {
-      // Implement Firestore deletion logic here
-      await deleteDoc(doc(db, 'infoContent', articleId));
-    } catch (error) {
-      console.error('Error deleting article from Firestore:', error);
-    }
-  };
+  // const deleteArticleFromFirestore = async (articleId) => {
+  //   try {
+  //     // Implement Firestore deletion logic here
+  //     await deleteDoc(doc(db, 'infoContent', articleId));
+  //   } catch (error) {
+  //     console.error('Error deleting article from Firestore:', error);
+  //   }
+  // };
 
-  //Resets the selected article after an update operation.
-  const handleUpdateDone = () => {
-    setSelectedArticle(null);
-  };
+  // //Resets the selected article after an update operation.
+  // const handleUpdateDone = () => {
+  //   setSelectedArticle(null);
+  // };
   // Sets the create mode to false after creating a new article.
   const handleCreateDone = () => {
     setCreateMode(false);
@@ -112,8 +120,7 @@ const InfoArticles = () => {
       {(selectedArticle || isCreateMode) && (
         <ArticleForm
           article={selectedArticle}
-          onUpdate={handleUpdateDone}
-          onCreate={handleCreateDone}
+          onCreateDone={handleCreateDone}
           onCancel={handleCancel}
         />
       )}

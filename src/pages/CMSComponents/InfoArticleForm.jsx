@@ -1,21 +1,18 @@
 import { useState, useEffect } from 'react';
-import { db } from '../../services/firebase.config';
-import {
-  doc,
-  updateDoc,
-  addDoc,
-  collection,
-  serverTimestamp,
-} from '@firebase/firestore';
+import useCrud from './customHooks/useCrud';
+import { serverTimestamp } from '@firebase/firestore';
 import PropTypes from 'prop-types';
-// In CMS
-// In the "Info Articles" section, when you press Create Article or Update 
-// the code below pops out a window that lets the user create or update using the form.
 
-const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
+// In CMS web page
+// In the "Info Articles" tab, when you press Create Article or Update
+// a form pops up that lets the user create or update using the form.
+
+const ArticleForm = ({ article, onCreateDone, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : '');
   const [text, setText] = useState(article ? article.text : '');
   const isUpdateMode = !!article;
+  const { createItem: createArticle, updateItem: updateArticle } =
+    useCrud('infoContent');
 
   const handleAction = async () => {
     try {
@@ -24,16 +21,11 @@ const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
           console.error('Error: Article ID is missing.');
           return;
         }
-        const articleRef = doc(db, 'infoContent', article.id);
-        await updateDoc(articleRef, { title, text });
-        onUpdate(); // Notify parent component that update is done
+        await updateArticle(article.id, { title, text });
+        // onUpdate(); // Notify parent component that update is done
       } else {
-        const newArticleRef = await addDoc(collection(db, 'infoContent'), {
-          title,
-          text,
-          dateAdded: serverTimestamp(),
-        });
-        onCreate(newArticleRef.id); // Notify parent component that creation is done
+        await createArticle({ title, text, dateAdded: serverTimestamp() });
+        onCreateDone(); // Notify parent component that creation is done
       }
     } catch (error) {
       console.error('Update/Create error:', error);
@@ -44,17 +36,15 @@ const ArticleForm = ({ article, onUpdate, onCreate, onCancel }) => {
     onCancel(); // Invoke the onCancel prop passed from the parent component
   };
 
-  // Event listener for the Escape key
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
-      handleCancel(); // Cancel if Escape key is pressed
-    }
-  };
-
   useEffect(() => {
-    // Add event listener when the component mounts
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        handleCancel(); // Cancel if Escape key is pressed
+      }
+    };
+
     document.addEventListener('keydown', handleKeyDown);
-    // Cleanup the event listener when the component unmounts
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
@@ -104,8 +94,7 @@ ArticleForm.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
   }),
-  onUpdate: PropTypes.func.isRequired,
-  onCreate: PropTypes.func.isRequired,
+  onCreateDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 
