@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useVideoData from './VideoComponentForm'; 
 import Video from '../LandingPageComponent/components/Video'; 
-import CollapsibleContainer from '../ContentComponent/cmsDashboardLayout/CollapsibleContainer';
+import CollapsibleContainer from '../CMSComponents/cmsDashboardLayout/CollapsibleContainer';
 
 
 function VideoComponent() {

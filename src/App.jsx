@@ -1,4 +1,4 @@
-import ContentDashboard from './pages/ContentComponent/ContentDashboard';
+import ContentDashboard from './pages/CMSComponents/ContentDashboard';
 import LoginGoogle from './authentication/LoginGoogle';
 import LandingComponent from './pages/LandingPageComponent/LandingPageComponent';
 import Navbar from './pages/LandingPageComponent/components/Navbar';
