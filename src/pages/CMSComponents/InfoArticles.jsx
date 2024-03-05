@@ -1,41 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect  } from 'react';
 import useCrud from './customHooks/useCrud';
 import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
 import ArticleForm from './InfoArticleForm';
 import InfoArticlesDeletion from './InfoArticlesDeletion';
-import { deleteDoc, doc } from 'firebase/firestore'; // Adjust the import path based on your Firestore setup
-import db from '../../services/firebase.config';
-import useInfoArticlesData from './customHooks/useInfoArticlesData';
 
-// In CMS page, in info Aricles tab
-// We display the four articles using the code here. We use customHook useInfoArticlesData to retrieve the articles from Firestore.
+// In CMS page, in Info Aricles tab
+// We display the four articles using the code here. We use customHook useCrud to retrieve the articles from Firestore.
 
 const InfoArticles = () => {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [isCreateMode, setCreateMode] = useState(false);
   const {
     loading,
     error,
     data: articles,
     deleteItem: deleteArticle,
+    fetchData 
   } = useCrud('infoContent');
 
-  // const { loading, error, articles: infoArticles } = useInfoArticlesData();
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [isCreateMode, setCreateMode] = useState(false);
-  // const [articles, setArticles] = useState([]);
-
-  // useEffect(() => {
-  //   setArticles(infoArticles);
-  // }, [infoArticles]);
+  useEffect(() => {
+    fetchData();
+  },[]);
 
   const handleDelete = async (deletedArticleId) => {
     try {
       await deleteArticle(deletedArticleId);
       setSelectedArticle(null);
-      // const newArticles = articles.filter(
-      //   (article) => article.id !== deletedArticleId
-      // );
-      // setArticles(newArticles);
-      // await deleteArticleFromFirestore(deletedArticleId);
     } catch (error) {
       console.error('Error deleting article:', error);
     }
@@ -74,6 +64,7 @@ const InfoArticles = () => {
 
   return (
     <CollapsibleContainer title="Info Articles">
+      
       <button
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
@@ -82,7 +73,10 @@ const InfoArticles = () => {
       </button>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
         {loading ? (
-          <div>Loading...</div>
+           <div>
+           <p>Loading articles...</p>
+           <p>This may take a moment depending on the data size.</p>
+         </div>
         ) : error ? (
           <div>Error: {error}</div>
         ) : (
