@@ -37,7 +37,7 @@ function VideoComponent() {
 
   return (
     <>
-        <CollapsibleContainer title="NoQ Demo Video">
+      <CollapsibleContainer title="NoQ Demo Video">
 
        {editVideoId && (
     <form onSubmit={handleSubmit} className="mb-4 max-w-md mx-auto">
