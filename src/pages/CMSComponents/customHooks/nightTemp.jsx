@@ -1,12 +1,6 @@
 export const fetchNightTemperature = async () => {
     try {
-      const getPosition = () => {
-        return new Promise((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
-      };
-  
-      const position = await getPosition();
+
   
       const { latitude, longitude } = { latitude: 59.325, longitude: 18.05 };
       {/* Duger detta API? eller ska vi leta vidare. Dock är detta för */}
