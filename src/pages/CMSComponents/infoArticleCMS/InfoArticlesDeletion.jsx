@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { deleteDoc, doc } from '@firebase/firestore';
-import { db } from '../../services/firebase.config';
-import useCrud from './customHooks/useCrud';
+import useCrud from '../customHooks/useCrud';
 
 const InfoArticlesDeletion = ({ articleId, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

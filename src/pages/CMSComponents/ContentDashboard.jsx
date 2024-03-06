@@ -1,4 +1,4 @@
-import InfoArticles from './InfoArticles';
+import InfoArticles from './infoArticleCMS/InfoArticles';
 import NavBar from './cmsDashboardLayout/NavBar';
 import VideoComponent from './VideoComponent';
 
