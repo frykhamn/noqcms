@@ -1,11 +1,18 @@
+import React, { useState, useEffect, useContext } from 'react';
 import logo from '../../../assets/images/logo.png';
 import SmallButtonComponent from './SmallButtonComponent';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import {AuthContext} from '../../../authentication/AuthProvider';
+import { AuthContext } from '../../../authentication/AuthProvider';
+import { fetchNightTemperature } from '../../CMSComponents/customHooks/nightTemp';
 
 const Navbar = () => {
   const { isLoggedIn } = useContext(AuthContext);
+  const [nightTemperature, setNightTemperature] = useState(null);
+
+  useEffect(() => {
+    fetchNightTemperature().then(setNightTemperature);
+  }, []);
+  
 
   return (
     <nav className="bg-white w-full mb-4 mt-2">
@@ -25,17 +32,18 @@ const Navbar = () => {
               >
                 Hem
               </Link>
-              
               <Link
                 to="/bli-vår-partner"
                 className="text-acc-blue inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
               >
                 Bli vår partner
               </Link>
-              <Link to="/jobba-med-oss" className="text-acc-blue inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+              <Link
+                to="/jobba-med-oss"
+                className="text-acc-blue inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+              >
                 Jobba med oss
               </Link>
-              
               <a
                 href="#"
                 className="text-acc-blue inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
@@ -49,15 +57,22 @@ const Navbar = () => {
                 Teamet
               </a>
             </div>
+            {/*TempDiv*/}
+            <div className="flex items-center">
+              {nightTemperature && (
+                <div className="text-sm text-gray-600 mr-4">
+                  Nattens temperatur: {nightTemperature}°C
+                </div>
+              )}
+            </div>
             <Link to="/loginCms" className="flex items-center justify-center">
-              <SmallButtonComponent title={isLoggedIn ? 'CMS Sidan': 'Logga In'} />
+              <SmallButtonComponent title={isLoggedIn ? 'CMS Sidan' : 'Logga In'} />
             </Link>
-          </div>
         </div>
       </div>
-    </nav>
+    </div>
+    </nav >
   );
 };
 
 export default Navbar;
-
