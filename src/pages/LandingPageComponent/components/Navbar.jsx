@@ -12,7 +12,7 @@ const Navbar = () => {
   useEffect(() => {
     fetchNightTemperature().then(setNightTemperature);
   }, []);
-  
+
 
   return (
     <nav className="bg-white w-full mb-4 mt-2">
@@ -57,20 +57,16 @@ const Navbar = () => {
                 Teamet
               </a>
             </div>
-            {/*TempDiv*/}
             <div className="flex items-center">
-              {nightTemperature && (
-                <div className="text-sm text-gray-600 mr-4">
-                  Nattens temperatur: {nightTemperature}°C
-                </div>
-              )}
+              {nightTemperature !== "-" && <div className="text-sm text-gray-600 mr-4">Nattens temperatur: {nightTemperature}°C</div>}
+              {nightTemperature === "-" && <div className="text-sm text-gray-600 mr-4">Nattens temperatur är inte tillgänglig</div>}
             </div>
             <Link to="/loginCms" className="flex items-center justify-center">
               <SmallButtonComponent title={isLoggedIn ? 'CMS Sidan' : 'Logga In'} />
             </Link>
+          </div>
         </div>
       </div>
-    </div>
     </nav >
   );
 };
