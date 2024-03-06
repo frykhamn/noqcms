@@ -1,8 +1,8 @@
 import { useState, useEffect  } from 'react';
-import useCrud from './customHooks/useCrud';
-import CollapsibleContainer from './cmsDashboardLayout/CollapsibleContainer';
+import useCrud from '../customHooks/useCrud';
+import CollapsibleContainer from '../cmsDashboardLayout/CollapsibleContainer';
 import ArticleForm from './InfoArticleForm';
-import InfoArticlesDeletion from './InfoArticlesDeletion';
+import InfoArticlesDeletion from '../infoArticleCMS/InfoArticlesDeletion';
 
 // In CMS page, in Info Aricles tab
 // We display the four articles using the code here. We use customHook useCrud to retrieve the articles from Firestore.

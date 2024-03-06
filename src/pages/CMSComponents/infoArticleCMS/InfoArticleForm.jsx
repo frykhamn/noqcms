@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useCrud from './customHooks/useCrud';
+import useCrud from '../customHooks/useCrud';
 import { serverTimestamp } from '@firebase/firestore';
 import PropTypes from 'prop-types';
 
