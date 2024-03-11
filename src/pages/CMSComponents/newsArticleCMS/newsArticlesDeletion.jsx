@@ -4,7 +4,7 @@ import useCrud from '../customHooks/useCrud';
 
 const NewsArticlesDeletion = ({ articleId, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { deleteItem: deleteArticle } = useCrud('newsContent');
+  const { deleteItem: deleteArticle } = useCrud('news-test');
 
   const handleDelete = async () => {
     try {
