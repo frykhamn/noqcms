@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 
 const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : '');
-  const [text, setText] = useState(article ? article.text : '');
+  const [body, setBody] = useState(article ? article.body : '');
+  const [author, setAuthor] = useState(article ? article.author : '');
+  const [preamble, setPreamble] = useState(article ? article.preamble : '');
+  const [created, setCreated] = useState(article ? article.created : '');
   const isUpdateMode = !!article;
   const { createItem: createArticle, updateItem: updateArticle } =
     useCrud('news-test');
@@ -17,9 +20,9 @@ const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
           console.error('Error: Article ID is missing.');
           return;
         }
-        await updateArticle(article.id, { title, text });
+        await updateArticle(article.id, { title, body, author, preamble, created });
       } else {
-        await createArticle({ title, text, dateAdded: serverTimestamp() });
+        await createArticle({ title, body, author, preamble, created: serverTimestamp() });
         onCreateDone();
       }
     } catch (error) {
@@ -47,7 +50,7 @@ const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-md shadow-md">
+      <div className="bg-white p-8 rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-4">
           {isUpdateMode ? 'Update News Article' : 'Create New News Article'}
         </h2>
@@ -58,12 +61,33 @@ const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
           onChange={(e) => setTitle(e.target.value)}
           className="w-full border p-2 mb-4"
         />
-        <label className="block mb-2">Text:</label>
+        <label className="block mb-2">Body:</label>
         <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="w-full border p-2 mb-4"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          className="w-full border p-2 mb-4 h-64" // Increased height
         ></textarea>
+        <label className="block mb-2">Author:</label>
+        <input
+          type="text"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          className="w-full border p-2 mb-4"
+        />
+        <label className="block mb-2">Preamble:</label>
+        <input
+          type="text"
+          value={preamble}
+          onChange={(e) => setPreamble(e.target.value)}
+          className="w-full border p-2 mb-4"
+        />
+        <label className="block mb-2">Created:</label>
+        <input
+          type="text"
+          value={created}
+          onChange={(e) => setCreated(e.target.value)}
+          className="w-full border p-2 mb-4"
+        />
         <div className="flex justify-end">
           <button
             onClick={handleCancel}
@@ -87,7 +111,10 @@ NewsArticleForm.propTypes = {
   article: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
-    text: PropTypes.string,
+    body: PropTypes.string,
+    author: PropTypes.string,
+    preamble: PropTypes.string,
+    created: PropTypes.any,
   }),
   onCreateDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

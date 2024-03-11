@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import useCrud from '../customHooks/useCrud';
 import CollapsibleContainer from '../cmsDashboardLayout/CollapsibleContainer';
-import newsArticleDeletion from '../newsArticleCMS/newsArticlesDeletion';
 import NewsArticlesDeletion from '../newsArticleCMS/newsArticlesDeletion';
+import NewsArticleForm from './newsArticleForm';
 
 
 const NewsArticles = () => {
@@ -67,7 +67,7 @@ const NewsArticles = () => {
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
       >
-        Create Article
+        Create new Article
       </button>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
         {loading ? (
@@ -110,7 +110,7 @@ const NewsArticles = () => {
         )}
       </ul>
       {(selectedArticle || isCreateMode) && (
-        <ArticleForm
+        <NewsArticleForm
           article={selectedArticle}
           onCreateDone={handleCreateDone}
           onCancel={handleCancel}
