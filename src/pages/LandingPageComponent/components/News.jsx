@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, limit, query } from "@firebase/firestore";
 import { db } from "../../../services/firebase.config";
+import { Link } from "react-router-dom";
+import slugGenerator from "../../CMSComponents/customHooks/slugGenerator";
 
 import BigButton from "./BigButton";
 
@@ -35,13 +37,14 @@ const News = () => {
         {news.map((post) => (
           <div key={post.id} className="w-2/5 flex flex-col">
             <div className="flex flex-row justify-between font-semibold text-lg mb-10">
-              <span>Blogginlägg från {post.author}</span>
+              <span>{`${post.title}, ${post.author}`}</span>
               <span>{post.created}</span>
             </div>
             <p className="mb-6">{post.body}</p>
-            <p className="mb-6">{post.body}</p>
             <div className="flex flex-row justify-end">
-              <BigButton variant={"primary"} title={"Läs mer"} />
+              <Link to={`/${slugGenerator(post.title)}`} state={{ post: post }}>
+                <BigButton variant={"primary"} title={"Läs mer"} />
+              </Link>
             </div>
           </div>
         ))}
