@@ -7,11 +7,7 @@ import { fetchNightTemperature } from '../../CMSComponents/customHooks/nightTemp
 
 const Navbar = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  const [nightTemperature, setNightTemperature] = useState(null);
 
-  useEffect(() => {
-    fetchNightTemperature().then(setNightTemperature);
-  }, []);
 
 
   return (
@@ -57,10 +53,7 @@ const Navbar = () => {
                 Teamet
               </a>
             </div>
-            <div className="flex items-center">
-              {nightTemperature !== "-" && <div className="text-sm text-gray-600 mr-4">Nattens temperatur: {nightTemperature}°C</div>}
-              {nightTemperature === "-" && <div className="text-sm text-gray-600 mr-4">Nattens temperatur är inte tillgänglig</div>}
-            </div>
+
             <Link to="/loginCms" className="flex items-center justify-center">
               <SmallButtonComponent title={isLoggedIn ? 'CMS Sidan' : 'Logga In'} />
             </Link>
