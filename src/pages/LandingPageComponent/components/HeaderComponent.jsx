@@ -1,10 +1,21 @@
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+
 import heroImage from '../../../assets/images/hero.png';
 import BigButton from './BigButton';
+import { fetchNightTemperature, homelessAmount } from '../../CMSComponents/customHooks/nightTemp';
 
 
 
 const HeaderComponent = () => {
+    const [nightTemperature, setNightTemperature] = useState(null);
+    const [amount, setAmount] = useState(null);
+
+    useEffect(() => {
+        fetchNightTemperature().then(setNightTemperature);
+        homelessAmount().then(setAmount);
+
+    }, []);
 
     return (
         <header
@@ -21,6 +32,12 @@ const HeaderComponent = () => {
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-noto mb-4 md:text-5xl xl:text-7xl">
                     <span className='block mb-4'> noQ jobbar för noll utsatta</span> <span className='block mb-8'> Ingen ska behöva sova ute </span>
                 </h1>
+                <div>
+                    <h4 className="text-xl md:text-2xl lg:text-3xl mb-4">
+                        {amount} hemlösa sover utomhus i Stockholm och det beräknas bli {nightTemperature}°C i natt.
+                    </h4>
+                </div>
+
                 <div className="flex flex-col md:flex-row gap-4">
                     <Link to={"/partner"}>
                         <BigButton variant={"primary"} title={"Bli Partner"}>
@@ -36,6 +53,9 @@ const HeaderComponent = () => {
                         </BigButton>
                     </a>
                 </div>
+
+
+
             </div>
 
         </header>
