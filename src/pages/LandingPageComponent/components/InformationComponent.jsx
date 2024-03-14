@@ -38,7 +38,7 @@ export default function InformationComponent() {
             <div key={item.id} className="mb-8">
               <h3 className="font-semibold mb-8">{item.title}</h3>
               <p className="pb-6 mb-4">{item.text}</p>
-              <SmallButtonComponent title={item.title}></SmallButtonComponent>
+              {/*               <SmallButtonComponent title={item.title}></SmallButtonComponent> */}
             </div>
           ))}
         </div>
