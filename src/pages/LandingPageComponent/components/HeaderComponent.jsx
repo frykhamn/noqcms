@@ -39,6 +39,8 @@ const HeaderComponent = () => {
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4">
+
+                  {/*  
                     <Link to={"/partner"}>
                         <BigButton variant={"primary"} title={"Bli Partner"}>
                         </BigButton>
@@ -52,6 +54,7 @@ const HeaderComponent = () => {
                         <BigButton variant={"secondary"} title={"Bli Teammedlem"}>
                         </BigButton>
                     </a>
+                */}
                 </div>
 
 

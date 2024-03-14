@@ -59,8 +59,11 @@ const Main = ({ videos }) => {
     <>
       <main>
         <InformationComponent></InformationComponent>
-        <News></News>
 
+
+        {/* <News></News>  */}
+        
+        {/* 
         {videos.map((video) => (
           <Video
             key={video.id}
@@ -70,7 +73,7 @@ const Main = ({ videos }) => {
             left={false}
           />
         ))}
-
+        */}
         <Team></Team>
       </main>
     </>

@@ -4,8 +4,8 @@ import SmallButttonComponent from './SmallButtonComponent';
 function Team() {
 
     const handleClick = () => {
-//navigate to /about    
-};
+        //navigate to /about    
+    };
 
     return (
         <section className="py-12">
@@ -23,10 +23,14 @@ function Team() {
 
                 <div className="flex flex-col items-center justify-center gap-14 mb-10">
                     <ProfileGallery></ProfileGallery>
+                    
+                    {/* 
                     <SmallButttonComponent
                         title={"Om oss"}
                         onClick={handleClick}
                     ></SmallButttonComponent>
+                    */}
+
                 </div>
             </div>
         </section>
