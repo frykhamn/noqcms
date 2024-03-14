@@ -1,27 +1,54 @@
-import React, { useState, useEffect, useContext } from 'react';
-import logo from '../../../assets/images/logo.png';
-import SmallButtonComponent from './SmallButtonComponent';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../authentication/AuthProvider';
-import { fetchNightTemperature } from '../../CMSComponents/customHooks/nightTemp';
+import {Menu, X} from "lucide-react";
+import { useState } from "react";
 
-const Navbar = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+const NavLinks = () => {
+    return(
+        <>
+            <Link to="/">Hem</Link>
+            <Link to="/bli-vår-partner">Bli vår partner</Link>
+            <Link to="/jobba-med-oss">Jobba med oss</Link>
+            {/* <Link to="/#">Om Oss</Link>
+            <Link to="/#">Teamet</Link> */}
+        </>
+    )
+}
 
+const Nav = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    }
 
-  return (
-    <nav className="bg-white w-full mb-4 mt-2">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex ">
-          <div className="flex items-center sm:pr-10">
-            <Link to="/">
-              <img className="block h-10 w-auto" src={logo} alt="Logo på NoQ" />
-            </Link>
-          </div>
-          <div className="flex justify-between w-3/4 mx-10">
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-10 sm:px-10">
-              {/* Navigation Links */}
+    return(
+        <>
+        {/* <div className="hidden sm:ml-6 sm:flex sm:space-x-10 sm:px-10"> */}
+        {/* text-acc-blue inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" */}
+        <nav className="flex w-1/3 justify-end">
+                <div className="hidden w-full md:flex">
+                    <div className="flex space-x-4 whitespace-nowrap">
+                        <NavLinks/>    
+                    </div>
+                </div>
+                <div className="md:hidden">
+                    <button onClick={toggleNavbar}>
+                    {isOpen ? <X /> : <Menu />}</button>
+                </div>
+        </nav>
+            {isOpen && (
+                <div className="flex basis-full flex-col items-center">
+                    <div className="flex flex-col space-y-4"> 
+          <NavLinks />
+        </div>
+                </div>
+            )}
+        </>
+    )
+}
+export default Nav;
+
+{/* <div className="hidden sm:ml-6 sm:flex sm:space-x-10 sm:px-10">
               <Link
                 to="/"
                 className="text-acc-blue inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
@@ -52,16 +79,4 @@ const Navbar = () => {
               >
                 Teamet
               </a>
-            </div>
-
-            <Link to="/loginCms" className="flex items-center justify-center">
-              <SmallButtonComponent title={isLoggedIn ? 'CMS Sidan' : 'Logga In'} />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav >
-  );
-};
-
-export default Navbar;
+            </div> */}
