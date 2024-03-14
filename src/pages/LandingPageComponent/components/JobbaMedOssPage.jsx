@@ -7,8 +7,11 @@ const JobbaMedOssPage = () => {
   const image = useGetImage("3pwolvay.bmp");
 
   return (
-    <div className="bg-bkg-light">
-      <img className="w-full h-auto" src={image} alt="Header Image" />
+    <>
+    <div className="max-w-4xl mx-auto px-4">
+        <img className="h-96 mx-auto" src={image} alt="Header Image" />
+      </div>
+        <div className="bg-bkg-light py-10">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">
           noQ söker dig som vill jobba för utsatta
@@ -151,6 +154,7 @@ const JobbaMedOssPage = () => {
       </div>
       <FooterComponent />
     </div>
+    </>
   );
 };
 
