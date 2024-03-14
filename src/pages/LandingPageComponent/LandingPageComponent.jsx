@@ -59,18 +59,20 @@ const Main = ({ videos }) => {
     <>
       <main>
         <InformationComponent></InformationComponent>
-        <News></News>
+        {/*        
+          <News></News>
 
-        {videos.map((video) => (
-          <Video
-            key={video.id}
-            content={video.text}
-            title={video.title}
-            videoSrc={video.videoSrc}
-            left={false}
-          />
-        ))}
-
+          {videos.map((video) => (
+            <Video
+              key={video.id}
+              content={video.text}
+              title={video.title}
+              videoSrc={video.videoSrc}
+              left={false}
+            />
+          ))}
+          
+        */}
         <Team></Team>
       </main>
     </>
