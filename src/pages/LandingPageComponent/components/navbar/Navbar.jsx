@@ -1,29 +1,55 @@
-import  { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import logo from '../../../../assets/images/logo.png';
 import SmallButtonComponent from '../SmallButtonComponent';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../authentication/AuthProvider';
 import { fetchNightTemperature } from '../../../CMSComponents/customHooks/nightTemp';
-import Nav from './Nav';
+import { Menu, X } from 'lucide-react';
+
+import NavLinks from './Nav';
+
 const Navbar = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <nav className="bg-white w-full mb-4 mt-2">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex">
-          <div className="flex items-center sm:pr-10">
-            <Link to="/">
-              <img className="logo block h-10" src={logo} alt="Logo på NoQ" />
-            </Link>
-          </div>
-              {/* Navigation Links */}
-          <Nav/>
+    <>
+      <nav className="flex items-center justify-between bg-white w-full mb-4 mt-2 px-4 sm:px-6 lg:px-8">
+        {' '}
+        {/* Use justify-between to spread items */}
+        <div className="flex items-center">
+          <Link to="/">
+            <img className="block h-10 w-auto" src={logo} alt="Logo på NoQ" />
+          </Link>
         </div>
-      </div>
-    </nav >
+        <div className="hidden md:flex w-full justify-end">
+          {' '}
+          {/* Align links to the right */}
+          <div className="hidden md:flex flex-grow justify-center space-x-8">
+            {' '}
+            {/* Add space between items */}
+            <NavLinks />
+          </div>
+        </div>
+        <div className="md:hidden">
+          <button onClick={toggleNavbar}>{isOpen ? <X /> : <Menu />}</button>
+        </div>
+      </nav>
+      {isOpen && (
+        <div className="flex basis-full flex-col items-center">
+          <div className="flex flex-col space-y-4">
+            {' '}
+            {/* Add space between items */}
+            <NavLinks style={{ textDecoration: 'none', color: '#3B82F6' }} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -42,7 +68,7 @@ export default Navbar;
 //       </div>
 //       <div className="hidden md:flex w-full justify-end"> {/* Align links to the right */}
 //         <div className="flex space-x-8"> {/* Add space between items */}
-//           <NavLinks />    
+//           <NavLinks />
 //         </div>
 //       </div>
 //       <div className="md:hidden">
