@@ -124,21 +124,14 @@ const JobbaMedOssPage = () => {
         </p>
         <h3 className="text-lg font-bold mb-2">Ansök!</h3>
         <p className="mb-2">
-          Intresse? Boka en tid med Ove Holmberg, projektledare här:{" "}
+        Skicka in din{" "}
           <a
-            href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0usphB5W1haAqpl3EODAd3szLZLOMCTq-ggW3X9HeszLYZHClDvu87mgmv_8JFpip6QZY_OXiU"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfZosC-Zfuc1LRRfrKDVVHryYUdfhUoJXjslC0i1bxhqRukaA/viewform"
             className="text-blue-500 underline"
           >
-            Oves tider – Ove Holmberg.
+            intresseanmälan här 
           </a>{" "}
-          Bara lite nyfiken? Anmäl dig till vår nästa demo{" "}
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSe10wrCIeZeCDgvpkgXHKPxMb2ou1HFdRRnlaArfb0NWfW7SQ/viewform"
-            className="text-blue-500 underline"
-          >
-            här
-          </a>
-          .
+          så hör vi av oss inom ett par veckor.{" "}
         </p>
         <h3 className="text-lg font-bold mb-2">Vi är noQ</h3>
         <p className="mb-2">
