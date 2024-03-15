@@ -1,6 +1,7 @@
 import InfoArticles from './infoArticleCMS/InfoArticles';
 import NavBar from './cmsDashboardLayout/NavBar';
-import VideoComponent from './VideoComponent';
+import VideoComponent from './videoComponent/VideoComponent';
+import NoqMembers from './noqMembers/noqMembers';
 
 const ContentDashboard = () => {
   return (
@@ -9,6 +10,8 @@ const ContentDashboard = () => {
       <InfoArticles />
       {/* NoQ Demo Video Component*/}
       <VideoComponent />
+      {/* NoQ Members */}
+      <NoqMembers />
     </div>
   );
 };
