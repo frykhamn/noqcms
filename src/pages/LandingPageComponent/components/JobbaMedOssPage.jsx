@@ -30,7 +30,7 @@ const JobbaMedOssPage = () => {
         </p>
         <div className="mb-4">
           <h3 className="text-lg font-bold mb-2">Krav/must have</h3>
-          <ul className="list-disc list-inside">
+          <ul className="list-disc list-inside font-list text-list">
             <li>Minst konversationskunskaper i både engelska och svenska.</li>
             <li>
               Stor självdisciplin då vi jobbar i ett team men ändå självständigt
@@ -44,7 +44,7 @@ const JobbaMedOssPage = () => {
         </div>
         <div className="mb-4">
           <h3 className="text-lg font-bold mb-2">Önskemål/nice to have</h3>
-          <ul className="list-disc list-inside">
+          <ul className="list-disc list-inside font-list text-list">
             <li>Erfarenhet av systemutveckling och programmeringsspråk.</li>
             <li>Kunskap om molnbaserade plattformar som AWS eller Azure.</li>
             <li>
