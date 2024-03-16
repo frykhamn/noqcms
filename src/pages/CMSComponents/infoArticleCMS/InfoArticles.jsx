@@ -3,6 +3,7 @@ import useCrud from '../customHooks/useCrud';
 import CollapsibleContainer from '../cmsDashboardLayout/CollapsibleContainer';
 import ArticleForm from './InfoArticleForm';
 import InfoArticlesDeletion from '../infoArticleCMS/InfoArticlesDeletion';
+import RichEditor from '../RichTextEditor';
 
 // In CMS page, in Info Aricles tab
 // We display the four articles using the code here. We use customHook useCrud to retrieve the articles from Firestore.
@@ -64,7 +65,6 @@ const InfoArticles = () => {
 
   return (
     <CollapsibleContainer title="Info Articles">
-      
       <button
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"

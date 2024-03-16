@@ -1,7 +1,9 @@
+
 import { useState, useEffect } from 'react';
 import useCrud from '../customHooks/useCrud';
 import { serverTimestamp } from '@firebase/firestore';
 import PropTypes from 'prop-types';
+import RichEditor from '../RichTextEditor';
 
 // In CMS web page
 // In the "Info Articles" tab, when you press Create Article or Update
@@ -11,6 +13,8 @@ const ArticleForm = ({ article, onCreateDone, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : '');
   const [text, setText] = useState(article ? article.text : '');
   const isUpdateMode = !!article;
+
+
   const { createItem: createArticle, updateItem: updateArticle } =
     useCrud('infoContent');
 
@@ -51,40 +55,39 @@ const ArticleForm = ({ article, onCreateDone, onCancel }) => {
   }, []); // Run only on component mount
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-md shadow-md">
-        <h2 className="text-2xl font-bold mb-4">
-          {isUpdateMode ? 'Update Article' : 'Create New Article'}
-        </h2>
-        <label className="block mb-2">Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full border p-2 mb-4"
-        />
-        <label className="block mb-2">Text:</label>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="w-full border p-2 mb-4"
-        ></textarea>
-        <div className="flex justify-end">
-          <button
-            onClick={handleCancel}
-            className="mr-2 bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleAction}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            {isUpdateMode ? 'Update' : 'Create'}
-          </button>
-        </div>
-      </div>
+<div className="fixed inset-0 flex justify-center items-center bg-opacity-50">
+  <div className="bg-white p-8 rounded-md shadow-md" style={{ width: '50%', padding: '20px' }}>
+    <h2 className="text-3xl font-bold mb-6">
+      {isUpdateMode ? 'Update Article' : 'Create New Article'}
+    </h2>
+    <label className="block mb-4">Title:</label>
+    <input
+      type="text"
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+      className="w-full border p-3 mb-6"
+    />
+    <label className="block mb-4">Text:</label>
+
+    <RichEditor text={text} onChangeText={setText} />
+
+
+    <div className="flex justify-end mt-6">
+      <button
+        onClick={handleCancel}
+        className="mr-4 bg-gray-500 text-white px-6 py-3 rounded"
+      >
+        Cancel
+      </button>
+      <button
+        onClick={handleAction}
+        className="bg-blue-500 text-white px-6 py-3 rounded"
+      >
+        {isUpdateMode ? 'Update' : 'Create'}
+      </button>
     </div>
+  </div>
+</div>
   );
 };
 

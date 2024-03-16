@@ -48,6 +48,8 @@
 
   "dependencies": {
 
+    "draft-js": "^0.11.7",
+
     "firebase": "^10.7.1",
 
     "lucide-react": "^0.357.0",
