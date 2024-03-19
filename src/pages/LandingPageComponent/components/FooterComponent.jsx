@@ -1,4 +1,3 @@
-import React from "react";
 import logo from '../../../assets/images/3pwolvay.bmp';
 
 const FooterComponent = () => {
@@ -32,12 +31,12 @@ const FooterComponent = () => {
         {/* Lower section for social icons and copyright */}
         <div className="flex flex-col items-center pt-4">
           {/* Social Icons */}
-          <div className="flex space-x-4 mb-4">
+          {/* <div className="flex space-x-4 mb-4"> */}
             {/* Replace 'X' with actual icons */}
+            {/* <a href="#" className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">X</a>
             <a href="#" className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">X</a>
             <a href="#" className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">X</a>
-            <a href="#" className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">X</a>
-          </div>
+          </div> */}
 
           {/* Copyright notice */}
           <div className="my-4">

@@ -1,13 +1,14 @@
 import InfoArticles from './infoArticleCMS/InfoArticles';
 import NavBar from './cmsDashboardLayout/NavBar';
-import VideoComponent from './videoComponent/VideoComponent';
-import NoqMembers from './noqMembers/noqMembers';
+import VideoComponent from './VideoComponent';
 
 const ContentDashboard = () => {
   return (
     <div>
       <NavBar />
       <InfoArticles />
+      <NewsArticles /> 
+
       {/* NoQ Demo Video Component*/}
       <VideoComponent />
       {/* NoQ Members */}

@@ -3,6 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        'list': '18px !important',
+      },
+      fontWeight: {
+        'list': 300,
+      },
+      letterSpacing: {
+        'list': '1.5px',
+      },
       fontFamily: {
         "montserrat": ['Montserrat', 'sans-serif'],
         "noto": ['Noto Sans', 'sans-serif'],
