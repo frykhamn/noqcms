@@ -9,6 +9,8 @@ import JobbaMedOssPage from "./pages/LandingPageComponent/components/JobbaMedOss
 import { AuthProvider } from "./authentication/AuthProvider";
 import BliVårPartner from "./pages/LandingPageComponent/components/BliVårPartnerSida";
 import ArticlePage from "./pages/LandingPageComponent/components/ArticlePage";
+import AboutUs from "./pages/LandingPageComponent/components/AboutUs";
+
 function App() {
   return (
     <>
@@ -26,6 +28,7 @@ function App() {
               <Route path="/dashboard" element={<ContentDashboard />} exact />
             </Route>
             <Route path="/nyheter/:title" element={<ArticlePage />} />
+            <Route path="/teamet" element={<AboutUs />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
