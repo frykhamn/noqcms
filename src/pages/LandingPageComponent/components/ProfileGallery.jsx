@@ -1,31 +1,36 @@
-import{ useState, useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../../../services/firebase.config';
 
 const ProfileGallery = () => {
-
-    const [profileImages, setProfileImages] = useState([]);
+    const [members, setMembers] = useState([]);
 
     useEffect(() => {
+        const unsubscribe = onSnapshot(collection(db, 'members'), (snapshot) => {
+            const fetchedMembers = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setMembers(fetchedMembers);
+        });
 
-        const loadImages = async () => {
-            // Import all image modules matching the specified pattern - stored in Object w keys
-            const imageModules = import.meta.glob('../../../assets/images/profiles/*.png')
-            // Get the paths of all imported image modules
-            const paths = Object.keys(imageModules);
-
-            // Load all images and get their default URLs via the keys in paths
-            const images = await Promise.all(paths.map(path => imageModules[path]()));
-            const imageUrls = images.map(module => module.default);
-
-            setProfileImages(imageUrls);
-        };
-        loadImages();
+        return () => unsubscribe(); // Unsubscribe from snapshot listener when component unmounts
     }, []);
 
     return (
-        <div className="flex flex-wrap gap-8 max-w-lg">
-            {profileImages.map((image, index) => (
-                <img key={index} src={image} alt={`Profile ${index + 1}`} className="w-16 h-16 rounded-full object-cover" />
+        <div className="member-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {members.map((member) => (
+                <div key={member.id} className="relative member-card p-2 bg-white rounded-lg shadow-md">
+                    <img src={member.img} alt={member.name} className="w-20 h-20 rounded-full object-cover mb-3" />
+                    <div className="relative">
+                        <h3 className="text-base mb-2 font-semibold">{member.name}</h3>
+                        <p className="text-sm mb-2 text-gray-600 mb-1 font-semibold">{member.role}</p>
+                        <p className="text-sm mb-2 text-gray-600 mb-1 font-semibold">{member.email}</p>
+                        {member.isActive ? (
+                            <p className="text-sm text-green-600 font-semibold">Aktiv</p>
+                        ) : (
+                            <p className="text-sm text-red-600 font-semibold">Inaktiv</p>
+                        )}
+                        {/* Add any additional information you want to display */}
+                    </div>
+                </div>
             ))}
         </div>
     );
