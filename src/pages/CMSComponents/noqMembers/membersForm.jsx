@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import CollapsibleContainer from "../cmsDashboardLayout/CollapsibleContainer";
 import MemberDeleteButton from "./membersDeletion";
 import { db, storage } from "../../../services/firebase.config";
-import { collection, getDocs, addDoc } from "@firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc,
+} from "@firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
 
@@ -15,6 +21,7 @@ function MemberForm() {
   const [members, setMembers] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [editingMember, setEditingMember] = useState(null);
 
   useEffect(() => {
     fetchMembers();
@@ -42,54 +49,95 @@ function MemberForm() {
     e.preventDefault(); // Prevent default form submission
     try {
       setIsUploading(true); // Set uploading state to true
-      const imgURL = await uploadFile(); // Upload the file
-      // Add form data along with image URL to Firestore
-      const docRef = await addDoc(collection(db, "members"), {
-        name,
-        email,
-        isActive,
-        role,
-        img: imgURL, // Include image URL in document data
-        timestamp: serverTimestamp(),
-      });
-
-      // Refresh member list
-      fetchMembers();
-
-      console.log("Document successfully added with ID: ", docRef.id);
-      // Clear the form fields after successful submission
-      setName("");
-      setEmail("");
-      setIsActive(false);
-      setRole("");
-      setFile(null);
-      setShowForm(false);
-      setIsUploading(false); // Set uploading state to false after successful upload
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
-  };
-
-  const uploadFile = async () => {
-    try {
-      let imgURL = ""; // Initialize empty string for image URL
+      let imgURL = "";
       if (file) {
         const name = new Date().getTime() + file.name;
         const storageRef = ref(storage, name);
         const uploadTask = uploadBytesResumable(storageRef, file);
-
-        // Wait for upload to complete
         await uploadTask;
-
-        // Get download URL after successful upload
         imgURL = await getDownloadURL(uploadTask.snapshot.ref);
       }
-      return imgURL; // Return the image URL
+
+      if (editingMember) {
+        // If editing, update the existing member
+        await updateMember(editingMember.id, {
+          name,
+          email,
+          role,
+          isActive,
+          img: imgURL || editingMember.img,
+          timestamp: serverTimestamp(),
+        });
+      } else {
+        // If adding, add a new member
+        const docRef = await addDoc(collection(db, "members"), {
+          name,
+          email,
+          role,
+          isActive,
+          img: imgURL,
+          timestamp: serverTimestamp(),
+        });
+        console.log("Document successfully added with ID: ", docRef.id);
+      }
+
+      fetchMembers(); // Refresh member list
+      clearForm(); // Clear form fields
     } catch (error) {
-      console.error("Error uploading file: ", error);
-      throw error; // Propagate the error
+      console.error("Error adding/editing document: ", error);
+    } finally {
+      setIsUploading(false); // Set uploading state to false after upload
     }
   };
+
+  const updateMember = async (id, newData) => {
+    try {
+      await updateDoc(doc(db, "members", id), newData);
+    } catch (error) {
+      console.error("Error updating member: ", error);
+      throw error;
+    }
+  };
+
+  const clearForm = () => {
+    setName("");
+    setEmail("");
+    setRole("");
+    setIsActive(false);
+    setFile(null);
+    setShowForm(false);
+    setEditingMember(null);
+  };
+
+  const handleEdit = (member) => {
+    setEditingMember(member);
+    setName(member.name);
+    setEmail(member.email);
+    setRole(member.role);
+    setIsActive(member.isActive);
+    setShowForm(true);
+  };
+
+  // const uploadFile = async () => {
+  //   try {
+  //     let imgURL = ""; // Initialize empty string for image URL
+  //     if (file) {
+  //       const name = new Date().getTime() + file.name;
+  //       const storageRef = ref(storage, name);
+  //       const uploadTask = uploadBytesResumable(storageRef, file);
+
+  //       // Wait for upload to complete
+  //       await uploadTask;
+
+  //       // Get download URL after successful upload
+  //       imgURL = await getDownloadURL(uploadTask.snapshot.ref);
+  //     }
+  //     return imgURL; // Return the image URL
+  //   } catch (error) {
+  //     console.error("Error uploading file: ", error);
+  //     throw error; // Propagate the error
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -249,7 +297,7 @@ function MemberForm() {
               <p className="text-sm text-gray-600 mb-2 font-semibold">
                 {member.role}
               </p>
-              <p className="text-sm text-gray-600 mb-2 font-semibold">
+              <p className="text-sm text-gray-600 mb-4 font-semibold">
                 {member.email}
               </p>
               {member.isActive ? (
@@ -257,6 +305,14 @@ function MemberForm() {
               ) : (
                 <p className="text-sm text-red-600 font-semibold">Inaktiv</p>
               )}
+
+              <button
+                onClick={() => handleEdit(member)}
+                className="absolute bottom-0 right-16 bg-blue-500 text-white px-2 py-0.5 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+              >
+                Update
+              </button>
+
               <MemberDeleteButton
                 memberId={member.id}
                 onDelete={fetchMembers}
