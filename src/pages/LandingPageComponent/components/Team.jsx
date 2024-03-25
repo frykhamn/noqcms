@@ -1,4 +1,5 @@
 import ProfileGallery from './ProfileGallery';
+import 'tailwindcss/tailwind.css';
 import SmallButttonComponent from './SmallButtonComponent';
 
 function Team() {
@@ -8,14 +9,14 @@ function Team() {
     };
 
     return (
-        <section className="py-12">
+        <section className="py-12"  style={{ backgroundColor: '#1d6677' }}>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-10">
-                    <h2 className="mb-3">
+                    <h2 className="mb-3 font-semibold">
                         Teamet bakom NoQ
                     </h2>
-                    <p className="text-gray-600">
-                        Gemensamt är villjan att bidra med vår kunskap till att skapa en
+                    <p className="text-white-600 font-semibold">
+                        Tillsammans delar vi en gemensam villja att bidra med vår kunskap till att skapa en
                         digtal lösning för att underlätta processen för brukare,
                         härbärgen och handläggare.
                     </p>

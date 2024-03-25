@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { db } from '../../services/firebase.config';
+import { db } from '../../../services/firebase.config';
 import { collection, getDocs, updateDoc, doc } from '@firebase/firestore';
 
 const useVideoData = () => {
