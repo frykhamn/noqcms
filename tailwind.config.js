@@ -17,6 +17,9 @@ export default {
         "noto": ['Noto Sans', 'sans-serif'],
 
       },
+      listStyleType: {
+          
+      },
       colors: {
         "acc-blue": "#18A0FB",
         "light-txt": "#E5E5E5",

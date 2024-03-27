@@ -49,8 +49,8 @@ const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-md shadow-md">
+<div className="fixed inset-0 flex justify-center items-center bg-opacity-50">
+  <div className="bg-white p-8 rounded-md shadow-md" style={{ width: '50%', padding: '20px' }}>
         <h2 className="text-2xl font-bold mb-4">
           {isUpdateMode ? 'Update News Article' : 'Create New News Article'}
         </h2>
