@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'; // Importera useState och useEffect
 import useCrud from '../customHooks/useCrud'; // Importera useCrud för att skapa eller uppdatera artiklar i Firebase.
 import { serverTimestamp } from '@firebase/firestore'; // Importera serverTimestamp för att generera tidsstämplar för artiklar.
 import PropTypes from 'prop-types'; // Importera PropTypes för att definiera egenskapstyper.
-import RichEditor from '../RichTextEditor'; // Importera RichEditor-komponenten för att hantera rikt textinmatning.
+import { convertFromHTML, convertToRaw, convertFromRaw } from 'draft-js';
+import RichEditor from '../RichText/RichTextEditor';
 
 const ArticleForm = ({ article, onCreateDone, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : ''); // Skapa ett statiskt tillstånd för titeln med useState-kroken.
@@ -10,15 +11,23 @@ const ArticleForm = ({ article, onCreateDone, onCancel }) => {
   const isUpdateMode = !!article; // Kontrollera om formuläret används för att uppdatera en befintlig artikel.
 
   const { createItem: createArticle, updateItem: updateArticle } =
-    useCrud('infoContent'); // Använd useCrud för att skapa eller uppdatera artiklar i Firebase.
+    useCrud('infocontenttest'); // Använd useCrud för att skapa eller uppdatera artiklar i Firebase.
 
   const handleAction = async () => {
     try {
+      if (!text) {
+        console.error('Error: Text is undefined.');
+        console.log(text);
+        return;
+      }
+
+
       if (isUpdateMode) {
         if (!article.id) {
           console.error('Error: Article ID is missing.');
           return;
         }
+
         await updateArticle(article.id, { title, text }); // Uppdatera den befintliga artikeln med den nya titeln och texten.
         // onUpdate(); // Notify parent component that update is done
       } else {
@@ -50,7 +59,7 @@ const ArticleForm = ({ article, onCreateDone, onCancel }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-opacity-50">
-      <div className="bg-white p-8 rounded-md shadow-md" style={{ width: '50%', padding: '20px' }}>
+      <div className="bg-white p-8 rounded-md shadow-md" style={{ height: '80%', width: '80%', padding: '20px' }}>
         <h2 className="text-3xl font-bold mb-6">
           {isUpdateMode ? 'Update Article' : 'Create New Article'}
         </h2>
@@ -76,7 +85,7 @@ const ArticleForm = ({ article, onCreateDone, onCancel }) => {
             onClick={handleAction}
             className="bg-blue-500 text-white px-6 py-3 rounded"
           >
-            {isUpdateMode ? 'Update' : 'Create'} 
+            {isUpdateMode ? 'Update' : 'Create'}
           </button>
         </div>
       </div>

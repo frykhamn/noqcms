@@ -3,7 +3,8 @@ import useCrud from '../customHooks/useCrud';
 import CollapsibleContainer from '../cmsDashboardLayout/CollapsibleContainer';
 import ArticleForm from './InfoArticleForm';
 import InfoArticlesDeletion from '../infoArticleCMS/InfoArticlesDeletion';
-import RichEditor from '../RichTextEditor';
+import RichEditor from '../RichText/RichTextEditor';
+import { ContentState, convertFromHTML, convertToRaw,convertFromRaw} from 'draft-js';
 
 // In CMS page, in Info Aricles tab
 // We display the four articles using the code here. We use customHook useCrud to retrieve the articles from Firestore.
@@ -17,7 +18,7 @@ const InfoArticles = () => {
     data: articles,
     deleteItem: deleteArticle,
     fetchData 
-  } = useCrud('infoContent');
+  } = useCrud('infocontenttest');
 
   useEffect(() => {
     fetchData();
@@ -83,10 +84,11 @@ const InfoArticles = () => {
           articles.map((article) => (
             <li
               key={article.id}
-              className="bg-white p-6 rounded-md shadow-md mb-4"
+              className="bg-white p-6 rounded-md shadow-md mb-4 list-none"
             >
               <h2 className="text-xl font-bold mb-2">{article.title}</h2>
-              <p className="text-gray-700">{article.text}</p>
+              
+              <p className="text-gray-700">{convertFromRaw(JSON.parse(article.text)).getPlainText()}</p>
               <div className="mt-4 flex justify-between items-center space-x-4">
                 <small className="text-gray-500">
                   {article.dateAdded
