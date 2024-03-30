@@ -24,7 +24,7 @@ const useCrud = (collectionName) => {
         ...doc.data(),
       }));
       setData(items);
-      console.log('Fetched data:', items); // Add this line
+      // console.log('Fetched data:', items);
     } catch (error) {
       setError(error.message);
     } finally {

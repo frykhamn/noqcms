@@ -28,7 +28,7 @@ const News = () => {
     fetchNews();
   }, []);
 
-  console.log(news);
+  // console.log(news);
 
   return (
     <section className="p-10 bg-bkg-dark text-white">

@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react'; // Importera useState och useEffect
 import useCrud from '../customHooks/useCrud'; // Importera useCrud för att skapa eller uppdatera artiklar i Firebase.
 import { serverTimestamp } from '@firebase/firestore'; // Importera serverTimestamp för att generera tidsstämplar för artiklar.
 import PropTypes from 'prop-types'; // Importera PropTypes för att definiera egenskapstyper.
-import { convertFromHTML, convertToRaw, convertFromRaw } from 'draft-js';
+// import { convertFromHTML, convertToRaw, convertFromRaw } from 'draft-js';
 import RichEditor from '../RichText/RichTextEditor';
 
-const ArticleForm = ({ article, onCreateDone, onCancel }) => {
+const ArticleForm = ({ article, onCreateDone, onUpdateDone, onCancel }) => {
   const [title, setTitle] = useState(article ? article.title : ''); // Skapa ett statiskt tillstånd för titeln med useState-kroken.
   const [text, setText] = useState(article ? article.text : ''); // Skapa ett statiskt tillstånd för texten med useState-kroken.
   const isUpdateMode = !!article; // Kontrollera om formuläret används för att uppdatera en befintlig artikel.
-
   const { createItem: createArticle, updateItem: updateArticle } =
     useCrud('infocontenttest'); // Använd useCrud för att skapa eller uppdatera artiklar i Firebase.
 
@@ -20,16 +19,13 @@ const ArticleForm = ({ article, onCreateDone, onCancel }) => {
         console.log(text);
         return;
       }
-
-
       if (isUpdateMode) {
         if (!article.id) {
           console.error('Error: Article ID is missing.');
           return;
         }
-
-        await updateArticle(article.id, { title, text }); // Uppdatera den befintliga artikeln med den nya titeln och texten.
-        // onUpdate(); // Notify parent component that update is done
+        await updateArticle(article.id, { title, text });
+        onUpdateDone();
       } else {
         await createArticle({ title, text, dateAdded: serverTimestamp() }); // Skapa en ny artikel med titel, text och tidsstämpel.
         onCreateDone(); // Notify parent component that creation is done
@@ -100,6 +96,7 @@ ArticleForm.propTypes = {
     text: PropTypes.string,
   }),
   onCreateDone: PropTypes.func.isRequired,
+  onUpdateDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 

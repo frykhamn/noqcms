@@ -3,7 +3,7 @@ import useCrud from '../customHooks/useCrud';
 import CollapsibleContainer from '../cmsDashboardLayout/CollapsibleContainer';
 import ArticleForm from './InfoArticleForm';
 import InfoArticlesDeletion from '../infoArticleCMS/InfoArticlesDeletion';
-import RichEditor from '../RichText/RichTextEditor';
+// import RichEditor from '../RichText/RichTextEditor';
 import { ContentState, convertFromHTML, convertToRaw,convertFromRaw} from 'draft-js';
 
 // In CMS page, in Info Aricles tab
@@ -33,19 +33,12 @@ const InfoArticles = () => {
     }
   };
 
-  // const deleteArticleFromFirestore = async (articleId) => {
-  //   try {
-  //     // Implement Firestore deletion logic here
-  //     await deleteDoc(doc(db, 'infoContent', articleId));
-  //   } catch (error) {
-  //     console.error('Error deleting article from Firestore:', error);
-  //   }
-  // };
-
   // //Resets the selected article after an update operation.
-  // const handleUpdateDone = () => {
-  //   setSelectedArticle(null);
-  // };
+  const handleUpdateDone = () => {
+    setCreateMode(false);
+    setSelectedArticle(null);
+    fetchData();
+  };
   // Sets the create mode to false after creating a new article.
   const handleCreateDone = () => {
     setCreateMode(false);
@@ -118,6 +111,8 @@ const InfoArticles = () => {
           article={selectedArticle}
           onCreateDone={handleCreateDone}
           onCancel={handleCancel}
+          onUpdateDone={handleUpdateDone}
+
         />
       )}
     </CollapsibleContainer>

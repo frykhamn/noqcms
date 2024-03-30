@@ -9,7 +9,7 @@ const useGetImage = (location) => {
       const storage = getStorage();
       const url = await getDownloadURL(ref(storage, location));
       setImage(url);
-      console.log(url);
+      // console.log(url);
     };
 
     fetchArticleImage();
