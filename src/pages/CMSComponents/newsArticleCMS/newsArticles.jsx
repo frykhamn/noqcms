@@ -39,9 +39,11 @@ const NewsArticles = () => {
   // };
 
   // //Resets the selected article after an update operation.
-  // const handleUpdateDone = () => {
-  //   setSelectedArticle(null);
-  // };
+  const handleUpdateDone = () => {
+    setCreateMode(false);
+    setSelectedArticle(null);
+    fetchData();
+  };
   // Sets the create mode to false after creating a new article.
   const handleCreateDone = () => {
     setCreateMode(false);
@@ -114,6 +116,7 @@ const NewsArticles = () => {
           article={selectedArticle}
           onCreateDone={handleCreateDone}
           onCancel={handleCancel}
+          onUpdateDone={handleUpdateDone}
         />
       )}
     </CollapsibleContainer>

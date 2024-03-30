@@ -3,7 +3,7 @@ import useCrud from '../customHooks/useCrud';
 import { serverTimestamp } from '@firebase/firestore';
 import PropTypes from 'prop-types';
 
-const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
+const NewsArticleForm = ({ article, onCreateDone, onCancel, onUpdateDone }) => {
   const [title, setTitle] = useState(article ? article.title : '');
   const [body, setBody] = useState(article ? article.body : '');
   const [author, setAuthor] = useState(article ? article.author : '');
@@ -21,6 +21,7 @@ const NewsArticleForm = ({ article, onCreateDone, onCancel }) => {
           return;
         }
         await updateArticle(article.id, { title, body, author, preamble, created });
+        onUpdateDone();
       } else {
         await createArticle({ title, body, author, preamble, created: serverTimestamp() });
         onCreateDone();
@@ -117,6 +118,7 @@ NewsArticleForm.propTypes = {
     created: PropTypes.any,
   }),
   onCreateDone: PropTypes.func.isRequired,
+  onUpdateDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 
