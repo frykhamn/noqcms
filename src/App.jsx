@@ -10,6 +10,7 @@ import { AuthProvider } from "./authentication/AuthProvider";
 import BliVårPartner from "./pages/LandingPageComponent/components/BliVårPartnerSida";
 import ArticlePage from "./pages/LandingPageComponent/components/ArticlePage";
 import AboutUs from "./pages/LandingPageComponent/components/AboutUs";
+import KontaktPage from "./pages/LandingPageComponent/components/KontaktPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/bli-vår-partner" element={<BliVårPartner />} />
             <Route path="*" element={<ErrorPage />} />
             <Route path="/jobba-med-oss" element={<JobbaMedOssPage />} />
+            <Route path="//kontakt" element={<KontaktPage />} />
             {/* Protect the CMS Dashboard route */}
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<ContentDashboard />} exact />
