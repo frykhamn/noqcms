@@ -23,7 +23,7 @@ function App() {
             <Route path="/loginCms" element={<LoginGoogle />} />
             <Route path="/bli-vår-partner" element={<BliVårPartner />} />
             <Route path="*" element={<ErrorPage />} />
-            <Route path="/jobba-med-oss" element={<JobbaMedOssPage />} />
+            <Route path="/bli-volontar" element={<JobbaMedOssPage />} />
             <Route path="//kontakt" element={<KontaktPage />} />
             {/* Protect the CMS Dashboard route */}
             <Route element={<PrivateRoute />}>

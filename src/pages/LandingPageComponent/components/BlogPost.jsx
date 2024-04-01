@@ -30,7 +30,7 @@ function BlogPost() {
                         <li>Kunskap om, eller en vilja att, lära dig våra verktyg/miljöer/språk: Figma, Slack, MS Teams, GitHub, GitHub Copilot, AWS, Discord, Google Suite, Confluence, Jira, Java 17+21, Python, Spring Boot, Azure Cloud, NeXTs, Docker, Postgres DB. Givetvis beroende på den roll du vill ha i teamet.</li>
                         <li>Passionerad för att använda dina kunskaper för att göra en positiv skillnad i samhället.</li>
                         <li>Erfarenhet av humanitärt arbete eller engagemang i initiativ för att hjälpa hemlösa eller socialt utsatta samhällen.</li>
-                        <li>Agilt arbetssätt med scum, lean och holocracy.</li>
+                        <li>Agilt arbetssätt med scrum, lean och holocracy.</li>
                     </ul>
                     <h3 className="mt-8">Plats
                     </h3>

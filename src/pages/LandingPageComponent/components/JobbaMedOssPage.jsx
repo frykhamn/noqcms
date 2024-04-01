@@ -13,7 +13,18 @@ const JobbaMedOssPage = () => {
       </div>
         <div className="bg-bkg-light py-10">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">
+      <h3 className="text-3xl font-bold mb-4">Vi är noQ</h3>
+        <p className="mb-2">
+          noQ är ett team som primärt vill hjälpa hemlösa i Stockholm men på
+          sikt alla utsatta i Sverige. Vårt mål är noll akut hemlösa i Stockholm
+          2024. Vi jobbar med teknik som drivs av artificiell intelligens men vi
+          söker även andra kompetenser och engagerade som vill vara med i vår
+          vision mot noll utsatta i samhället.
+        </p>
+        <p className="text-gray-500">
+          ps. Vi söker även partners och sponsorer
+        </p>
+        <h1 className="text-2xl font-bold mt-4">
           noQ söker dig som vill jobba för utsatta
         </h1>
         <p className="mb-4">
@@ -74,14 +85,14 @@ const JobbaMedOssPage = () => {
           </ul>
         </div>
         <div className="mb-4">
-          <h3 className="text-lg font-bold mb-2">Plats</h3>
+          <h3 className="text-2xl font-bold mb-2">Plats</h3>
           <p>
             Vi jobbar alla på distans hemifrån eller där det passar dig, men
             ibland träffas vi i Stockholm.
           </p>
         </div>
         <div className="mb-4">
-          <h3 className="text-lg font-bold mb-2">Arbetstid</h3>
+          <h3 className="text-2xl font-bold mb-2">Arbetstid</h3>
           <p>
             Du disponerar själv din tid och när du vill jobba. När vi
             sprintplanerar så anger du hur mycket du kan bidra den kommande
@@ -91,7 +102,7 @@ const JobbaMedOssPage = () => {
           </p>
         </div>
         <div className="mb-4">
-          <h3 className="text-lg font-bold mb-2">Arbetsform</h3>
+          <h3 className="text-2xl font-bold mb-2">Arbetsform</h3>
           <p>
             Det här är en oavlönad och distansbaserat roll på noQ, precis som
             alla andra i noQ. I den här rollen kommer du att jobba med vårt team
@@ -102,7 +113,7 @@ const JobbaMedOssPage = () => {
           </p>
         </div>
         <div className="mb-4">
-          <h3 className="text-lg font-bold mb-2">Avslut/paus</h3>
+          <h3 className="text-2xl font-bold mb-2">Avslut/paus</h3>
           <p>
             Tid kommer och tid går. Kan du inte bidra med något den kommande
             perioden/sprinten säger du bara det, så lägger vi dig på väntelistan
@@ -110,19 +121,19 @@ const JobbaMedOssPage = () => {
             utan problem.
           </p>
         </div>
-        <h3 className="text-lg font-bold mb-2">Verktyg</h3>
+        <h3 className="text-2xl font-bold mb-2">Verktyg</h3>
         <p className="mb-2">
           Vi tillhandahåller all mjukvara i form av licenser och behörigheter,
           du ansvarar för din egen arbetsmiljö inklusive hårdvara (dator mm).
         </p>
-        <h3 className="text-lg font-bold mb-2">Notera!</h3>
+        <h3 className="text-2xl font-bold mb-2">Notera!</h3>
         <p className="mb-2">
           Det här är inte en betald tjänst. Alla VI jobbar för att hjälpa
           utsatta människor, bredda våra nätverk och kanske lära sig något
           användbart. Vi kommer under 2024 samarbeta med arbetsförmedlingen som
           en möjlighet till praktikplats.
         </p>
-        <h3 className="text-lg font-bold mb-2">Ansök!</h3>
+        <h3 className="text-2xl font-bold mb-2">Ansök!</h3>
         <p className="mb-2">
         Skicka in din{" "}
           <a
@@ -133,17 +144,7 @@ const JobbaMedOssPage = () => {
           </a>{" "}
           så hör vi av oss inom ett par veckor.{" "}
         </p>
-        <h3 className="text-lg font-bold mb-2">Vi är noQ</h3>
-        <p className="mb-2">
-          noQ är ett team som primärt vill hjälpa hemlösa i Stockholm men på
-          sikt alla utsatta i Sverige. Vårt mål är noll akut hemlösa i Stockholm
-          2024. Vi jobbar med teknik som drivs av artificiell intelligens men vi
-          söker även andra kompetenser och engagerade som vill vara med i vår
-          vision mot noll utsatta i samhället.
-        </p>
-        <p className="text-gray-500">
-          ps. Vi söker även partners och sponsorer
-        </p>
+        
       </div>
       <FooterComponent />
     </div>
