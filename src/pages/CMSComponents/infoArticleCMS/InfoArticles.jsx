@@ -58,7 +58,7 @@ const InfoArticles = () => {
   };
 
   return (
-    <CollapsibleContainer title="Info Articles">
+    <CollapsibleContainer title="Main page Four Articles">
       <button
         onClick={handleCreateClick}
         className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300"
